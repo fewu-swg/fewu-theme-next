@@ -2,7 +2,6 @@ import MarkdownIt from "markdown-it";
 import markdownItAbbr from "markdown-it-abbr/dist/markdown-it-abbr.js";
 import markdownItAdmonition from "markdown-it-admonition";
 import alert from "markdown-it-alert";
-import markdownItCjkBreaks from "markdown-it-cjk-breaks/dist/markdown-it-cjk-breaks.js";
 import markdownItMark from "markdown-it-mark/dist/markdown-it-mark.js";
 import markdownItSub from "markdown-it-sub/dist/markdown-it-sub.js";
 import markdownItSup from "markdown-it-sup/dist/markdown-it-sup.js";
@@ -27,7 +26,6 @@ md
     .use(markdownItAbbr)
     .use(markdownItAdmonition)
     .use(alert.default)
-    .use(markdownItCjkBreaks)
     .use(markdownItMark)
     .use(markdownItSub)
     .use(markdownItSup)
