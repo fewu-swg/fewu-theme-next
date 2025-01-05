@@ -1,10 +1,10 @@
 declare module 'fewu-renderer-markdown';
 
-declare interface fewuRendererMarkdown {
-    type: RegExp;
+declare class fewuRendererMarkdown {
+    static type: RegExp;
 
-    render(content: string, templatePath?: string, variables?: object): Promise<string>;
-    renderFile(templatePath: string, variables?: object): Promise<string>;
+    static render(content: string, templatePath?: string, variables?: object): Promise<string>;
+    static renderFile(templatePath: string, variables?: object): Promise<string>;
 }
 
 declare class FewuRendererMarkdown {
