@@ -24,7 +24,9 @@ const md = MarkdownIt({
 
 md
     .use(markdownItAbbr)
-    .use(markdownItAdmonition)
+    .use(markdownItAdmonition, {
+        types: ["abstract", "attention", "caution", "error", "info", "note", "tip", "success", "question", "warning", "failure", "danger", "bug", "example", "quote"]
+    })
     .use(alert.default)
     .use(markdownItMark)
     .use(markdownItSub)
