@@ -1,11 +1,12 @@
 import MarkdownIt from "markdown-it";
-import markdownItAbbr from "markdown-it-abbr/dist/markdown-it-abbr.js";
 import markdownItAdmonition from "markdown-it-admonition";
-import alert from "markdown-it-alert";
-import markdownItMark from "markdown-it-mark/dist/markdown-it-mark.js";
-import markdownItSub from "markdown-it-sub/dist/markdown-it-sub.js";
-import markdownItSup from "markdown-it-sup/dist/markdown-it-sup.js";
 import hljs from "highlightjs";
+import { abbr } from "@mdit/plugin-abbr";
+import { alert } from "@mdit/plugin-alert";
+import { footnote } from "@mdit/plugin-footnote";
+import { mark } from "@mdit/plugin-mark";
+import { sub } from "@mdit/plugin-sub";
+import { sup } from "@mdit/plugin-sup";
 
 import { readFile } from "fs/promises";
 
@@ -23,14 +24,19 @@ const md = MarkdownIt({
 });
 
 md
-    .use(markdownItAbbr)
+    .use(abbr)
     .use(markdownItAdmonition, {
         types: ["abstract", "attention", "caution", "error", "info", "note", "tip", "success", "question", "warning", "failure", "danger", "bug", "example", "quote"]
     })
-    .use(alert.default)
-    .use(markdownItMark)
-    .use(markdownItSub)
-    .use(markdownItSup)
+    .use(alert, {
+        alertNames: [
+            "abstract", "attention", "caution", "error", "info", "note", "tip", "success", "question", "warning", "failure", "danger", "bug", "example", "quote"
+        ]
+    })
+    .use(footnote)
+    .use(mark)
+    .use(sub)
+    .use(sup)
 
 class FewuRendererMarkdown {
     type = /\.md$/;
