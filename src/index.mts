@@ -58,4 +58,4 @@ const fewuRendererMarkdown = new MarkdownRenderer();
 
 export default fewuRendererMarkdown; // this should be dropped when we finished unified renderer system.
 
-export { MarkdownRenderer };
+export { MarkdownRenderer, MarkdownRenderer as renderer };
