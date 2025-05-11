@@ -40,7 +40,9 @@ md
     .use(sub)
     .use(sup);
 
-class MarkdownRenderer extends AbstractRenderer {
+class MarkdownRenderer implements AbstractRenderer {
+    __fewu__ = 'renderer';
+
     type = /\.md$/;
 
     async render(template: string, templatePath: string, variables: object): Promise<string> {
