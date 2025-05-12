@@ -1,0 +1,27 @@
+extends global_layout.pug
+
+append head
+    meta(data-nosplash="1")
+    title #{page.title} - #{ctx.config.title}
+
+block content
+    .post-main.NeoWidget
+        +post-meta(page,true)
+        if(page.properties.image)
+            .post-img
+                img(src=page.properties.image,alt='The image of this article.')
+        +multi-language(page)
+        article#markdown_fillContent
+            != page.content
+        +license(page)
+    +giscus-widget(page)
+    .next-page
+        - let is_earliest = page.current == (page.total - 1)
+        - let is_latest = page.current == 0
+        a.--smooth.left(href=!is_latest&&url_for(page.prev.relative_path),class=is_latest?'disabled':'')
+            .arrow!= _icon('material-symbols:chevron_right','rounded')
+            .title= is_latest?__('Already latest'):page.prev.title
+        a.--smooth.right(href=!is_earliest&&url_for(page.next.relative_path),class=is_earliest?'disabled':'')
+            .title= is_earliest?__('Already earliest'):page.next.title
+            .arrow!= _icon('material-symbols:chevron_right','rounded')
+    #markdown_TOC

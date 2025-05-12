@@ -1,0 +1,261 @@
+@use "./_declaration.scss" as *;
+
+:root {
+    color-scheme: light dark;
+    font-family: Roboto, sans-serif, system-ui;
+    --hue: var(--config-hue, 250);
+    --Wpage-width: min(calc(100% - 2rem), 75rem);
+    --Wcon: var(--Wpage-width);
+    --Cbrand: oklch(.7 .14 var(--hue));
+    --Cdisplay: #000000bf;
+    --Cbg: oklch(.95 .01 var(--hue));
+    --Ccard-bg: var(--card-bg);
+    --Ccard-bg-hover: oklch(.98 .005 var(--hue));
+    --Cbtn-plain-bg-hover: oklch(.95 .025 var(--hue));
+    --Cbtn-content: oklch(.55 .12 var(--hue));
+    --Cbtn-regular-bg: oklch(.95 .025 var(--hue));
+    --Cbtn-regular-bg-hover: oklch(.9 .05 var(--hue));
+    --Ctext-25: #0000004d;
+    --Ctext-50: #0000008d;
+    --Ctext-75: #000000bf;
+    --Ctext-100: #000;
+
+    @each $percent, $value in (100, $card-corner-100), (75, $card-corner-75), (50,$card-corner-50), (25,$card-corner-25) {
+        --card-corner-#{$percent}: #{$value};
+    }
+
+    --card-bg: white;
+    --card-gap: #{$card-gap};
+    --card-corner: #{$card-corner};
+    --card-corner-circle: #{$card-corner-circle};
+    --card-shadow: #{$card-shadow};
+    --card-padding: #{$card-padding};
+}
+
+@media(prefers-color-scheme:dark) {
+    :root {
+        --Cbrand: oklch(.75 .14 var(--hue));
+        --Cdisplay: #ffffffbf;
+        --Cbg: oklch(.16 .014 var(--hue));
+        --Ccard-bg-hover: oklch(.3 .03 var(--hue));
+        --Cbtn-plain-bg-hover: oklch(.3 .035 var(--hue));
+        --Cbtn-content: oklch(.75 .1 var(--hue));
+        --Cbtn-regular-bg: oklch(.33 .035 var(--hue));
+        --Cbtn-regular-bg-hover: oklch(.38 .04 var(--hue));
+        --Ctext-25: #ffffff4d;
+        --Ctext-50: #ffffff8d;
+        --Ctext-75: #ffffffbf;
+        --Ctext-100: #fff;
+
+        --card-bg: oklch(.23 .015 var(--hue));
+    }
+}
+
+@media(prefers-color-scheme:dark) {
+    :root {
+        --text-color: white;
+        --bg-color: black;
+
+    }
+}
+
+@media(max-width:768px) {
+    :root {
+        --Wpage-width: 100vw
+    }
+}
+
+body {
+    width: 100vw;
+    overflow-x: hidden;
+    background: var(--Cbg);
+    color: var(--Cdisplay);
+    margin: 0;
+    position: relative;
+    font-family: Roboto, sans-serif, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji"
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    background-image: url("/banner.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 46.25vh;
+    width: 100%;
+    background-position: center;
+    pointer-events: none;
+    background-color: var(--Cbg);
+    opacity: 0;
+    transform: scale(1.1);
+    top: 2rem;
+    transition-property: opacity, top, transform, height;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
+}
+
+body.loaded::before {
+    opacity: 1;
+    transform: none;
+    top: 0;
+}
+
+html::-webkit-scrollbar {
+    display: none
+}
+
+html {
+    scrollbar-width: none
+}
+
+body {
+    color-scheme: light dark;
+    background-color: var(--Cbg);
+    color: var(--Ctext-100);
+    margin: 0;
+    padding: 0;
+}
+
+body.not-ready {
+    opacity: 0
+}
+
+#NEO_MAIN {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: $card-gap;
+    max-width: var(--Wpage-width);
+    margin: calc(37.75vh - 4.5rem) auto 0;
+}
+
+#NEO_MAIN>:is(.mainCon, .sideCon),
+.stickyGroup {
+    display: flex;
+    flex-direction: column;
+    gap: $card-gap;
+}
+
+@media(min-width: 1024px) {
+    #NEO_MAIN {
+        flex-direction: row;
+    }
+
+    #NEO_MAIN>.mainCon {
+        width: calc(100% - 18.5rem);
+    }
+
+    #NEO_MAIN>.sideCon {
+        width: 17.5rem;
+
+        &>.stickyGroup {
+            position: sticky;
+            top: 1rem;
+        }
+    }
+}
+
+@media (max-width:1024px) {
+    #NEO_MAIN>.sideCon {
+        opacity: 1;
+        top: 0;
+        transform: none;
+        position: relative;
+        transition-property: opacity, transform, top, margin;
+        transition-duration: .149s;
+        transition-timing-function: ease-in-out;
+    }
+
+    body:is(.being-replaced, :not(.main-anim-finished)) #NEO_MAIN>.sideCon {
+        opacity: 0;
+        top: 5rem;
+        transform: scale(1.1);
+    }
+}
+
+#NEO_MAIN,
+#NEO_REPLACE {
+    opacity: 0;
+    top: 10rem;
+    transform: scale(1.1);
+    position: relative;
+    transition-property: max-width, height, opacity, transform, top, margin;
+    transition-duration: .149s;
+    transition-timing-function: ease-in-out;
+    pointer-events: none;
+}
+
+body.dom-loaded #NEO_MAIN,
+body.main-anim-finished #NEO_REPLACE {
+    opacity: 1;
+    top: 0;
+    transform: none;
+    pointer-events: unset;
+}
+
+body.being-replaced #NEO_REPLACE {
+    opacity: 0;
+    transform: scale(1.1);
+    top: 7rem;
+}
+
+.loading-circle {
+    $r: 5rem;
+    position: fixed;
+    width: calc($r * 2);
+    height: calc($r * 2);
+    left: calc(50% - $r);
+    top: calc(50% - $r);
+    background-color: var(--card-bg);
+    border-radius: 100vmax;
+    z-index: 2000;
+    box-shadow: 0px 0px 5rem var(--Cbrand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease-in-out;
+    transition-delay: .125s;
+}
+
+body:not(.dom-loaded) .loading-circle {
+    animation: loading-circle-start .25s ease-in-out 1;
+}
+
+:is(body.being-replaced) .loading-circle {
+    opacity: 1;
+}
+
+.loading-circle::before {
+    $r: 5rem;
+    content: '';
+    display: block;
+    width: calc($r / 1.15);
+    height: calc($r / 1.15);
+    border: 1rem solid var(--Cbtn-regular-bg);
+    border-top: 1rem solid var(--Cbtn-content);
+    border-radius: 100vmax;
+    animation: loading-circle-spin 2.5s linear infinite;
+}
+
+@keyframes loading-circle-start {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes loading-circle-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+svg path, symbol path {
+    fill: currentColor;
+}

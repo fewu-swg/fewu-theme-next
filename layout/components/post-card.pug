@@ -1,0 +1,16 @@
+mixin post-card(item)
+    .post-card(class=item.properties.image&&'image')
+        .contentBox
+            header.title
+                a.--smooth(href=url_for(item.relative_path))
+                    h2= item.title
+            +post-meta(item)
+            .excerpt!= item.excerpt
+            .length
+                - let evlTime = Math.ceil(item.length/250)
+                .wordCount= item.length+' '+__('words')
+                .hr
+                .evlTime= evlTime+' '+__(evlTime==1?'Minute':'Minutes')
+        a.--smooth.readMore(href=url_for(item.relative_path),style=item.properties.image&&'background-image: url('+item.properties.image+')')
+            .cover!= _icon('material-symbols:chevron_right','rounded')
+            .button

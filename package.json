@@ -1,20 +1,13 @@
 {
-  "name": "@fewu-swg/fewu-renderer-pug",
+  "name": "@fewu-swg/fewu-theme-next",
   "version": "1.0.0",
-  "description": "A pug renderer plugin for Fewu.",
+  "description": "The NEXT theme, default theme for Fewu.",
   "license": "GPL-2.0-only",
   "author": "0xarch",
   "type": "module",
-  "main": "dist/index.mjs",
-  "types": "dist/index.d.mts",
   "dependencies": {
-    "pug": "^3.0.3"
-  },
-  "devDependencies": {
-    "@fewu-swg/abstract-types": "^1.0.0",
-    "@types/node": "^22.15.17",
-    "@types/pug": "^2.0.10",
-    "typescript": "^5.8.3"
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@material-symbols/svg-400": "^0.27.2"
   },
   "publishConfig": {
     "access": "public"

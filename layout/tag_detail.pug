@@ -1,0 +1,14 @@
+extends global_layout.pug
+
+append head
+    title #{_container_of('tags',page.current).key} - #{__('Tags')} - #{ctx.config.title}
+
+block content
+    - let current_container = _container_of('tags',page.current)
+    .NeoWidget
+        h2.archive-label #{current_container.key}
+        ul.index-ul
+            each post in current_container.values
+                li
+                    +labeled-card(post)
+    +page-navigator(current_container.total,current_container.current,`/tags/${current_container.key}`)
