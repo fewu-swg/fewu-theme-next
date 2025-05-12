@@ -1,30 +1,19 @@
 {
-  "name": "@fewu-swg/fewu-renderer-markdown",
-  "version": "1.2.2",
-  "description": "A Markdown renderer plugin for Fewu.",
+  "name": "@fewu-swg/fewu-renderer-pug",
+  "version": "1.0.0",
+  "description": "A pug renderer plugin for Fewu.",
   "license": "GPL-2.0-only",
   "author": "0xarch",
   "type": "module",
   "main": "dist/index.mjs",
   "types": "dist/index.d.mts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "dependencies": {
-    "@mdit/plugin-abbr": "^0.16.0",
-    "@mdit/plugin-alert": "^0.16.0",
-    "@mdit/plugin-footnote": "^0.16.8",
-    "@mdit/plugin-mark": "^0.16.0",
-    "@mdit/plugin-sub": "^0.16.0",
-    "@mdit/plugin-sup": "^0.16.0",
-    "highlight.js": "^11.11.1",
-    "markdown-it": "^14.1.0",
-    "markdown-it-admonition": "^1.0.4"
+    "pug": "^3.0.3"
   },
   "devDependencies": {
     "@fewu-swg/abstract-types": "^1.0.0",
-    "@types/markdown-it": "^14.1.2",
     "@types/node": "^22.15.17",
+    "@types/pug": "^2.0.10",
     "typescript": "^5.8.3"
   },
   "publishConfig": {
