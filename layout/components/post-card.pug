@@ -5,7 +5,7 @@ mixin post-card(item)
                 a.--smooth(href=url_for(item.relative_path))
                     h2= item.title
             +post-meta(item)
-            .excerpt!= item.excerpt
+            .excerpt!= item.excerpt.replace(/<a[\s\S]*?>[\s\S]*?<\/a>/,'')
             .length
                 - let evlTime = Math.ceil(item.length/250)
                 .wordCount= item.length+' '+__('words')
