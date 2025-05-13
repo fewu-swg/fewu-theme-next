@@ -182,7 +182,7 @@
         list-style: none;
         top: 5rem;
         right: calc($card-gap * 1.5);
-        width: calc((100vw - var(--Wpage-width))/2 - 3 * $card-gap);
+        width: calc((100vw - var(--Wpage-width))/2 - 2 * $card-gap);
         display: flex;
         flex-direction: column;
         counter-reset: toc_counter_h2;
@@ -200,9 +200,12 @@
 
     #markdown_TOC>*{
         cursor: pointer;
-        display: flex;
         border-radius: $card-corner-50;
         transition: background-color .125s ease-in-out, color .125s ease-in-out;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
     }
 
     #markdown_TOC .li-2 {

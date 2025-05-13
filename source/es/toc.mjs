@@ -13,7 +13,7 @@ const TOC = (markdown_content, toc) => {
         const H = v.nodeName[1];
         let li = document.createElement('li');
         li.classList.add(`li-${H}`);
-        // li.setAttribute('pid', pid);
+        li.id = li.textContent.replace(/ /g,'_');
         li.textContent = v.textContent;
         li.addEventListener("click", () => {
             window.scrollBy({ top: v.getBoundingClientRect().y, behavior: "smooth" });
