@@ -56,6 +56,7 @@ Or copy this `package.json` to working directory (where you put `config.yaml`) t
 
 ## Features
 
+* Support for Multi-language (with zh-CN, fr, en-US(default) langauge profile now)
 * Support for Light/Dark mode (automatic switching)
 * Support for senseless page navigating (Pjax-like)
 * Responsive layout

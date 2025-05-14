@@ -1,9 +1,8 @@
 .side.user-intro.NeoWidget
-    if ctx.config.avatar
-        img.avatar(loading='lazy',src=ctx.config.avatar)
+    img.avatar(loading='lazy',src=(ctx.config.avatar || url_for('/avatar.webp')))
     h2.userName
         a(href=ctx.config.url)= ctx.config.author
-    .intro= (ctx.config.data && (ctx.config.data.intro || ctx.config.data.announcement)) || 'The stupid one'
+    .intro= ctx.config.note || ctx.config.description || (ctx.config.data && (ctx.config.data.intro || ctx.config.data.announcement)) || 'Write something here...'
     .socialLinks
         each val,key in ctx.config.social_links || {}
             a.link(href=val.url,title=key)!=get_fa_brand(val.icon)
