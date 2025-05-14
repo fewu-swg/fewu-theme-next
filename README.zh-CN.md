@@ -56,6 +56,7 @@ npm i -S @fortawesome/free-brands-svg-icons @material-symbols/svg-400
 
 ## 功能
 
+* 支持多语言（目前有zh-CN,fr,en(默认)的语言文件）
 * 支持亮暗主题（自动切换）
 * 支持无感导航（类Pjax）
 * 响应式布局
