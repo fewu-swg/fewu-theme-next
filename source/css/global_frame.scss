@@ -11,6 +11,7 @@
     box-shadow: $card-shadow;
     background: var(--Ccard-bg);
     box-sizing: border-box;
+    backdrop-filter: blur(20px);
 }
 
 .iconBlock {
@@ -68,6 +69,7 @@ header.global {
     border-radius: 0 0 $card-corner $card-corner;
     box-shadow: $card-shadow;
     background-color: var(--Ccard-bg);
+    backdrop-filter: blur(20px);
     transition-property: width, height, top, color, background-color;
     transition-duration: .15s;
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
@@ -193,6 +195,7 @@ header.global {
             border-radius: $card-corner-75;
             background-color: var(--Ccard-bg);
             padding: .5rem;
+            backdrop-filter: blur(20px);
 
             &.palette {
                 transition: opacity .125s ease-in-out, top .125s ease-in-out;

@@ -24,7 +24,7 @@
         --card-corner-#{$percent}: #{$value};
     }
 
-    --card-bg: white;
+    --card-bg: rgba(255,255,255,.9);
     --card-gap: #{$card-gap};
     --card-corner: #{$card-corner};
     --card-corner-circle: #{$card-corner-circle};
@@ -47,7 +47,7 @@
         --Ctext-75: #ffffffbf;
         --Ctext-100: #fff;
 
-        --card-bg: oklch(.23 .015 var(--hue));
+        --card-bg: oklch(.23 .015 var(--hue) / .9);
     }
 }
 
