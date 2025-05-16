@@ -199,6 +199,7 @@ blockquote {
 
     &>a {
         text-decoration: none;
+        cursor: pointer;
         color: var(--Ctext-75);
         background-color: var(--Ccard-bg);
         border-radius: $card-corner;
