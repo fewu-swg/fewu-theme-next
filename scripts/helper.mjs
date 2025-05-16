@@ -1,19 +1,8 @@
 import { join, relative } from "path";
 import { _i18n, ltl } from "./language.mjs";
-import SVGS, { get_material_symbols, reset_material_symbols } from "./svgs.mjs";
+import { get_material_symbols, reset_material_symbols } from "./svgs.mjs";
 import { languages } from "./append_page.mjs";
 import { get_fa_brand } from "./fontawesome.mjs";
-
-let SVG_USED = [];
-
-const get_svg  = (str) => {
-    if (SVG_USED.includes(str)) {
-        return SVGS[str].prefix + `<use xlink:href="#svg:${str}">` + SVGS[str].suffix;
-    } else {
-        SVG_USED.push(str);
-        return SVGS[str].prefix + `<symbol id="svg:${str}">${SVGS[str].inner}</symbol><use xlink:href="#svg:${str}">` + SVGS[str].suffix;
-    }
-};
 
 export default function (ctx) {
     let helpers = {
@@ -31,12 +20,11 @@ export default function (ctx) {
             } else if(str.startsWith('material-symbols:') && type) {
                 return get_material_symbols(str.replace('material-symbols:',''),type);
             } else {
-                return get_svg(str);
+                console.log(`Deprecated or unknown svgs used while getting ${str}!`);
+                return ``;
             }
         },
-        get_svg,
         clear_build: () => {
-            SVG_USED = [];
             reset_material_symbols();
         },
         post_url_for: (path) => {
