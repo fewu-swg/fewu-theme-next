@@ -292,7 +292,6 @@ footer.global {
 
 .post-card {
     display: flex;
-    max-height: 15rem;
 
     & a {
         text-decoration: none;
@@ -306,6 +305,7 @@ footer.global {
     flex-direction: column;
     gap: .75rem;
     box-sizing: border-box;
+    min-height: 13rem;
 }
 
 .post-card.image>.contentBox {
@@ -352,6 +352,7 @@ footer.global {
     display: flex;
     color: var(--Ctext-25);
     font-weight: 400;
+    margin-top: auto;
 }
 
 .post-card>.contentBox>.length>.hr {
@@ -384,23 +385,6 @@ footer.global {
     background-position: center center;
     background-size: cover;
 
-    .post-card.image>& {
-        width: 28%;
-        display: flex;
-        justify-content: center;
-
-        &>.cover {
-            opacity: 0;
-            background-color: #0004;
-            color: #fff;
-            transition: opacity .25s ease-in-out;
-        }
-
-        &:hover>.cover {
-            opacity: 1;
-        }
-    }
-
     &>.cover {
         opacity: 1;
         position: absolute;
@@ -423,6 +407,23 @@ footer.global {
         object-fit: cover;
         object-position: center;
         height: 100%;
+    }
+}
+
+.post-card.image>.readMore {
+    width: 28%;
+    display: flex;
+    justify-content: center;
+
+    &>.cover {
+        opacity: 0;
+        background-color: #0004;
+        color: #fff;
+        transition: opacity .25s ease-in-out;
+    }
+
+    &:hover>.cover {
+        opacity: 1;
     }
 }
 
@@ -482,7 +483,7 @@ footer.global {
         align-items: center;
         justify-content: center;
         border-radius: $card-corner-100;
-        background-color: var(--card-bg);
+        background-color: var(--Ccard-bg);
         box-shadow: $card-shadow;
         color: var(--Cbrand);
         cursor: pointer;
