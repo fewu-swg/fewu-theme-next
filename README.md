@@ -8,7 +8,7 @@ This is the default theme for Fewu 3. Inspired by [Fuwari theme for Astro](https
 
 ### Through `fewu-cli`
 
-**Recommend**
+**Recommended**
 
 Install `fewu-cli`:
 ```shell
