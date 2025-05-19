@@ -1,3 +1,6 @@
+import Reload from "./smoothNav.mjs";
+import { DoOthers } from "./ui.mjs";
+
 export function navBarInit() {
     try {
         const NAV_ROOT = document.querySelector('header.global');
@@ -25,6 +28,7 @@ export function navBarInit() {
         });
         palette();
         hamburger();
+        search();
         NAV_ROOT.setAttribute('mounted', 'true');
     } catch (e) {
         console.error(e);
@@ -70,8 +74,8 @@ function hamburger() {
 }
 
 function palette() {
-    let paletteButton = document.querySelector('header.global .operations .palette');
-    let palettePanel = document.querySelector('header.global .operation-container .palette');
+    let paletteButton = document.getElementById('headerButtonPalette');
+    let palettePanel = document.getElementById('headerComponentPalette');
     __listen(paletteButton, palettePanel,(on)=>{
         palettePanel.classList[on ? 'add' : 'remove']('on');
     });
@@ -103,4 +107,66 @@ function palette() {
         localStorage.setItem('0xarch.github.io/color-hue', inputer.value);
         docRoot.style.setProperty('--config-hue', inputer.value);
     });
+}
+
+function search() {
+    const Button = document.getElementById('headerButtonSearch');
+    const Menu = document.getElementById('headerComponentSearch');
+    __listen(Button, Menu, (on) => {
+        Menu.classList[on ? 'add' : 'remove']('on');
+    });
+    let objPromise = (async () => {
+        let raw = await fetch("/search.json");
+        let json = await raw.json();
+        return Object.entries(json);
+    })();
+    /**
+     * @type {HTMLInputElement}
+     */
+    let input = Menu.querySelector('input');
+    let clearButton = Menu.querySelector('.clear');
+    let searchButton = Menu.querySelector('.search');
+    let resultContainer = Menu.querySelector('.resultContainer');
+    let shouldRun = true;
+    async function doSearch() {
+        if (!shouldRun) return;
+        shouldRun = false;
+        let leastTimer = new Promise((r) => {
+            setTimeout(() => {
+                r();
+            }, 350);
+        })
+        let obj = await objPromise;
+        let queryString = input.value;
+        let results = [];
+        if (queryString === '') {
+        } else {
+            for (let [k, v] of obj) {
+                if (typeof v.c === 'string' && v.c.includes(queryString)) {
+                    results.push([k, v.t]);
+                } else if (typeof v.t === 'string' && v.t.includes(queryString)) {
+                    results.push([k, v.t]);
+                }
+            }
+            resultContainer.innerHTML = '';
+            results.forEach(v => {
+                resultContainer.innerHTML += `<a class="--smooth" href=/${v[0]}><b>${v[1]}</b><span>${v[0]}</span></a>`;
+            });
+            Reload.applyTo('a.--smooth', DoOthers);
+        }
+        await leastTimer;
+        shouldRun = true;
+    }
+    input.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter') {
+            doSearch();
+        }
+    });
+    searchButton.addEventListener('click', () => {
+        doSearch();
+    });
+    clearButton.addEventListener('click', () => {
+        input.value = '';
+        resultContainer.innerHTML = '';
+    })
 }

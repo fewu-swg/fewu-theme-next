@@ -78,6 +78,12 @@
         text-decoration: none;
     }
 
+    &>.meta-title {
+        color: var(--Ctext-100);
+        margin: .85rem 0;
+        font-weight: bold;
+    }
+
     &>.meta-content {
         margin: 0;
         display: flex;
@@ -151,8 +157,8 @@
     align-items: center;
     color: var(--Ctext-75);
     background-color: var(--Cbtn-regular-bg);
-    margin: 1rem -1rem;
-    padding: 1rem;
+    margin: 1rem var(--banner-vertical-align,-1rem);
+    padding: 1rem calc(-1 * var(--banner-vertical-align, -1rem));
     box-sizing: border-box;
 
     &:first-child {

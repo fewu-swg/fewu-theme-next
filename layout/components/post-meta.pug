@@ -1,5 +1,16 @@
-mixin post-meta(post,include_time=false)
+mixin post-meta(post,include_time=false, include_title=false)
     .post-meta
+        if include_time
+            .meta-content
+                .wordCount
+                    i.iconBlock.plain!= _icon('material-symbols:notes','rounded')
+                    span #{post.length} #{__('words')}
+                .readTime
+                    - let evlTime = Math.ceil(post.length/250)
+                    i.iconBlock.plain!= _icon('material-symbols:schedule','rounded')
+                    span #{evlTime} #{__(evlTime==1?'Minute':'Minutes')}
+        if include_title
+            h1.meta-title= post.title
         .meta-content
             .pubDate
                 i.iconBlock!= _icon('material-symbols:calendar_today','rounded')
@@ -16,12 +27,3 @@ mixin post-meta(post,include_time=false)
                 each val in post.tags.slice(1)
                     .hr
                     a.--smooth(href=url_for('/tags/'+val+'/0/index.html'))= val
-        if include_time
-            .meta-content
-                .wordCount
-                    i.iconBlock.plain!= _icon('material-symbols:notes','rounded')
-                    span #{post.length} #{__('words')}
-                .readTime
-                    - let evlTime = Math.ceil(post.length/250)
-                    i.iconBlock.plain!= _icon('material-symbols:schedule','rounded')
-                    span #{evlTime} #{__(evlTime==1?'Minute':'Minutes')}

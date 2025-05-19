@@ -11,7 +11,6 @@
     box-shadow: $card-shadow;
     background: var(--Ccard-bg);
     box-sizing: border-box;
-    backdrop-filter: blur(20px);
 }
 
 .iconBlock {
@@ -69,7 +68,6 @@ header.global {
     border-radius: 0 0 $card-corner $card-corner;
     box-shadow: $card-shadow;
     background-color: var(--Ccard-bg);
-    backdrop-filter: blur(20px);
     transition-property: width, height, top, color, background-color;
     transition-duration: .15s;
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
@@ -193,70 +191,8 @@ header.global {
 
         &>* {
             border-radius: $card-corner-75;
-            background-color: var(--Ccard-bg);
+            background-color: var(--Cbg);
             padding: .5rem;
-            backdrop-filter: blur(20px);
-
-            &.palette {
-                transition: opacity .125s ease-in-out, top .125s ease-in-out;
-                position: relative;
-                top: 0rem;
-                opacity: 1;
-                &:not(.on) {
-                    top: -1rem;
-                    pointer-events: none;
-                    opacity: 0;
-                }
-
-                &>.line {
-                    display: flex;
-                    height: 2rem;
-                    padding: .25rem;
-                    box-sizing: border-box;
-
-                    &>* {
-                        width: 2rem;
-                        height: 2rem;
-                        padding: .25rem;
-                        box-sizing: border-box;
-                        background-color: var(--Cbtn-regular-bg);
-                        color: var(--Cbtn-content);
-                        border-radius: $card-corner-50;
-                        text-align: center;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-
-                        &.reset-button:hover {
-                            background-color: var(--Cbtn-regular-bg-hover);
-                        }
-
-                        &.number-show {
-                            margin-left: auto;
-                            width: 4rem;
-                        }
-                    }
-                }
-                &>.scroll {
-                    padding: .25rem;
-                    box-sizing: border-box;
-                    margin-top: .5rem;
-                    &>.scroller {
-                        display: block;
-                        height: 1.5rem;
-                        width: 100%;
-                        border-radius: $card-corner-25;
-                        appearance: none;
-                        background: var(--color-selection-bar);
-                        margin:0;
-                        &::-webkit-slider-thumb {
-                            height: 1.25rem;
-                            width: .75rem;
-                            border-radius: $card-corner-25;
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -315,6 +251,8 @@ header.global {
         }
     }
 }
+
+@import "./header_components";
 
 footer.global {
     color: var(--Cdisplay);

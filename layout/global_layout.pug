@@ -23,7 +23,7 @@ html(lang=page.language)
             link(data-across='1',rel='stylesheet',href=url_for('css/global_side.css'))
             link(data-across='1',rel='stylesheet',href=url_for('css/global_page.css'))
             link(data-across='1',rel='stylesheet',href=url_for('css/global_widgets.css'))
-            script(data-across='1',type="module",src=url_for('es/ui.js'))
+            script(data-across='1',type="module",src=url_for('es/ui.mjs'))
 
     body(OCP='OVERRIDE')
         .loading-circle(aria-hidden="true")
@@ -35,10 +35,17 @@ html(lang=page.language)
                 a.--smooth.home(href=url_for('/'))= __('Home')
                 a.--smooth.archives(href=url_for('/archives/0/'))= __('Archives')
             .operations
-                .palette!= _icon('material-symbols:palette','rounded')
+                #headerButtonSearch!= _icon('material-symbols:search','rounded')
+                #headerButtonPalette!= _icon('material-symbols:palette','rounded')
                 .toggle!= _icon('material-symbols:menu','rounded')
             .operation-container
-                .palette
+                #headerComponentSearch
+                        .queryContainer 
+                            input
+                            button.clear!= _icon('material-symbols:refresh','rounded')
+                            button.search!= _icon('material-symbols:search','rounded')
+                        .resultContainer
+                #headerComponentPalette
                     .line
                         .reset-button!= _icon('material-symbols:refresh','rounded')
                         .number-show
