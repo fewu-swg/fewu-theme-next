@@ -328,18 +328,15 @@ footer.global {
     text-wrap: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 2.25rem;
 }
 
 .post-card>.contentBox>.post-meta {
     font-weight: 500;
-    overflow: hidden;
-    width: 100%;
-    text-wrap: nowrap;
-    position: relative;
-    color: var(--Ctext-25);
+    color: var(--Ctext-50);
 
     & a {
-        color: var(--Ctext-25);
+        color: var(--Ctext-50);
     }
 }
 
@@ -439,12 +436,33 @@ footer.global {
 }
 
 @media(max-width: 768px) {
+    .mainCon>.index-ul {
+        gap: 0;
+    }
+    .mainCon>.index-ul>li {
+
+        &>.post-card {
+            border-radius: 0;
+        }
+
+        &:first-child>.post-card {
+            border-radius: $card-corner $card-corner 0 0;
+        }
+        &:last-child>.post-card {
+            border-radius: 0 0 $card-corner $card-corner;
+        }
+    }
     .post-card {
         flex-direction: column-reverse;
         max-height: 35rem;
 
-        &>.contentBox {
+        &>.contentBox, &.image>.contentBox {
             padding: .5rem .75rem;
+            width: 100%;
+            max-width: 100%;
+            &>.title>a>h2 {
+                text-wrap: wrap;
+            }
         }
 
         &>.readMore {
@@ -454,16 +472,23 @@ footer.global {
         &.image>.readMore {
             display: flex;
             width: 100%;
+            aspect-ratio: 21 / 9;
 
-            &>.cover>svg {
-                transform: scale(2);
-            }
+            // &>.cover>svg {
+            //     transform: scale(2);
+            // }
 
             &>.button {
                 width: 100%;
                 max-height: 10rem;
                 height: unset;
             }
+        }
+        & .post-meta {
+            font-size: .875rem;
+        }
+        & .post-meta .tag {
+            display: none;
         }
     }
 }
