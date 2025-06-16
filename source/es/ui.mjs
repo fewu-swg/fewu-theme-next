@@ -3,22 +3,33 @@ import { toc } from './toc.mjs';
 import { findAndInitGiscus } from './giscus.mjs';
 import Reload from './smoothNav.mjs';
 
+function isSpider() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const spiderKeywords = [
+        'googlebot', 'bingbot', 'baiduspider', 'yandexbot',
+        'duckduckbot', 'slurp', 'facebot', 'twitterbot'
+    ];
+    return spiderKeywords.some(keyword => userAgent.includes(keyword));
+}
+
 ((window) => {
     window.SINGLE_REM = parseInt(window.getComputedStyle(document.documentElement).fontSize);
     globalThis.scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 })(window);
 
-(function (window) {
-    window.passedLocation = [window.location.href];
-    window.onpopstate = function () {
-        passedLocation.pop();
-        if (!passedLocation.length) return;
-        window.Reload.goTo(passedLocation[passedLocation.length - 1], true, DoOthers);
-    };
-    window.Reload = Reload;
-})(window, void 0);
+if (!isSpider()) {
+    (function (window) {
+        window.passedLocation = [window.location.href];
+        window.onpopstate = function () {
+            passedLocation.pop();
+            if (!passedLocation.length) return;
+            window.Reload.goTo(passedLocation[passedLocation.length - 1], true, onPageProcess);
+        };
+        window.Reload = Reload;
+    })(window, void 0);
+}
 
-export function DoOthers() {
+export function onPageProcess() {
     document.body.classList.remove('main-anim-finished');
     // giscus
     findAndInitGiscus();
@@ -27,7 +38,7 @@ export function DoOthers() {
     // NavigationBar
     navBarInit();
     // Smooth Navigate
-    Reload.applyTo('a:is(.--smooth,.__)', DoOthers);
+    Reload.applyTo('a:is(.--smooth,.__)', onPageProcess);
     // highlight
     setTimeout(() => {
         if (window.hljs) {
@@ -72,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }).then(() => {
         document.body.classList.add('dom-loaded');
         setTimeout(scrollToTop, 0);
-        DoOthers();
+        onPageProcess();
         try {
             const NAV_ROOT = document.querySelector('header.global');
             NAV_ROOT.classList.add('anim');
@@ -85,8 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
-document.addEventListener('DOMContentLoaded',()=>{
-    if(document.querySelector('meta[data-nosplash="1"]') && window.location.href.endsWith('/')){
-        history.replaceState('','', window.location.href.slice(0,window.location.href.length-1));
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('meta[data-nosplash="1"]') && window.location.href.endsWith('/')) {
+        history.replaceState('', '', window.location.href.slice(0, window.location.href.length - 1));
     }
 })

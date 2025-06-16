@@ -17,6 +17,10 @@
         border-radius: $card-corner-75;
     }
 
+    & .intro {
+        margin: 0 .75rem;
+        color: var(--Ctext-50);
+    } 
 
     .socialLinks {
         display: flex;
@@ -59,8 +63,8 @@
 
     & a {
         transition: color .25s ease-in-out;
-        color: var(--Cdisplay);
-
+        color: var(--Ctext-100);
+        font-weight: bold;
     }
 
     &::after {
