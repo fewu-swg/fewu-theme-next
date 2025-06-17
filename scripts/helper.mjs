@@ -65,6 +65,6 @@ export default function (ctx) {
             return languages[current];
         }
     };
-    ctx.plugin.helpers.array_unique = (array) => [... new Set(array)]
-    Object.assign(ctx.plugin.helpers,helpers);
+    ctx.extend.helpers.array_unique = (array) => [... new Set(array)]
+    Object.assign(ctx.extend.helpers,helpers);
 }

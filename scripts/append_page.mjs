@@ -8,7 +8,7 @@ export default function append_page(ctx) {
             languages.push(post.language);
         }
     }
-    ctx.plugin.append_pages.push({
+    ctx.extend.append_pages.push({
         type: 'side_widget',
         get(ctx) {
             return [
