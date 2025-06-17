@@ -1,7 +1,8 @@
 extends global_layout.pug
 
 append head
-    title #{__('Archives')} - #{ctx.config.title}
+    meta(name="description" content="Archive page of this website.")
+    title #{__('Archives')}(#{page.current}) - #{ctx.config.title}
 
 block content
     .NeoWidget

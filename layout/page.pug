@@ -1,6 +1,7 @@
 extends global_layout.pug
 
 append head
+    meta(name="description" content=ctx.config.descripiton || ctx.config.note + "\n Page "+page.current)
     title= ctx.config.title
 
 block content
