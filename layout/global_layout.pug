@@ -5,6 +5,8 @@ include components/license.pug
 include components/labeled-card.pug
 include components/multi-language.pug
 include components/giscus.pug
+include components/back-to-top.pug
+include components/loading-circle.pug
 
 - clear_build()
 
@@ -26,7 +28,8 @@ html(lang=page.language)
             script(data-across='1',type="module",src=url_for('es/ui.mjs'))
 
     body(OCP='OVERRIDE')
-        .loading-circle(aria-hidden="true")
+        +loading-circle
+        +back-to-top
         header.global
             a.__.kLogo(href=url_for('/'))
                 .home-icon!= _icon('material-symbols:home','rounded')
