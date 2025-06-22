@@ -125,8 +125,8 @@ img {
 
 code {
     padding: .25rem;
-    color: var(--Cdisplay);
-    background-color: var(--Cbg);
+    color: var(--Cbtn-content);
+    background-color: var(--Cbtn-regular-bg);
     border-radius: $card-corner-25;
     font-family: 'Hack', monospace, 'monospace';
 }
