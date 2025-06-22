@@ -37,6 +37,8 @@ html(lang=page.language)
             .links.nav-links
                 a.__.nav-link.home(href=url_for('/'))= __('Home')
                 a.__.nav-link.archives(href=url_for('/archives/0/'))= __('Archives')
+                for v,k in ctx.config.additional_navs
+                    a.__.nav-link(href=v)= k.startsWith('^') ? k.slice(1) : __(k)
             .operations
                 #headerButtonSearch!= _icon('material-symbols:search','rounded')
                 #headerButtonPalette!= _icon('material-symbols:palette','rounded')
