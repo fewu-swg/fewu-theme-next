@@ -62,8 +62,25 @@ npm i -S @fortawesome/free-brands-svg-icons @material-symbols/svg-400
 * 响应式布局
 * 评论系统（支持giscus）
 * 文章目录
+* Open Graph 协议
 
 ## 依赖项
 
 * (npm) @fortawesome/free-brands-svg-icons
 * (npm) @material-symbols/svg-400
+
+## 配置
+
+### 自定义导航栏
+
+添加 `additional_navs` (`Record<string,string>) 到你的配置文件中,
+键(导航名)必须是字符串, 值必须是绝对URL, 值将被直接填入`href`
+
+
+默认情况下, 若语言文件中包含键, 则键会被翻译. 以 `^` 开头的键将不会被翻译, `^` 将在生成时被移除.
+
+```yaml
+additional_navs:
+  ^About: /posts/about.md # 不会翻译
+  About: /posts/about.md # 会翻译
+```

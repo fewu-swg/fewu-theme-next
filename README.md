@@ -62,8 +62,24 @@ Or copy this `package.json` to working directory (where you put `config.yaml`) t
 * Responsive layout
 * Comments (giscus)
 * Table of content
+* Open Graph Protocol
 
 ## Dependencies
 
 * (npm) @fortawesome/free-brands-svg-icons
 * (npm) @material-symbols/svg-400
+
+## Configurations
+
+### Custom Navigate
+
+Add `additional_navs` (`Record<string,string>) to your configuration file,
+The key (name) must be a string, the value must be a absolute url, the url will be directly filled into `href`
+
+Default, the key will be translated if it's been found in the translations file. Keys start with `^` will not be translated and the starting `^` will be removed.
+
+```yaml
+additional_navs:
+  ^About: /posts/about.md # Will not be translated
+  About: /posts/about.md # Will be translated
+```
