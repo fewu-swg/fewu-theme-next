@@ -28,12 +28,12 @@ html(lang=page.language)
     body(OCP='OVERRIDE')
         .loading-circle(aria-hidden="true")
         header.global
-            a.--smooth.kLogo(href=url_for('/'))
+            a.__.kLogo(href=url_for('/'))
                 .home-icon!= _icon('material-symbols:home','rounded')
                 .text!= ctx.config.title || `${ctx.config.author}'s Blog`
-            .links
-                a.--smooth.home(href=url_for('/'))= __('Home')
-                a.--smooth.archives(href=url_for('/archives/0/'))= __('Archives')
+            .links.nav-links
+                a.__.nav-link.home(href=url_for('/'))= __('Home')
+                a.__.nav-link.archives(href=url_for('/archives/0/'))= __('Archives')
             .operations
                 #headerButtonSearch!= _icon('material-symbols:search','rounded')
                 #headerButtonPalette!= _icon('material-symbols:palette','rounded')
