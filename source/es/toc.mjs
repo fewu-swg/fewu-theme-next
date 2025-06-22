@@ -7,6 +7,7 @@ const TOC = (markdown_content, toc) => {
         console.error(`No {toc} specified.`);
         return;
     }
+    let backToTopButton = document.querySelector('#backToTopButton');
     let tocList = markdown_content.querySelectorAll("h2, h3, h4, h5, h6");
     let liList = [];
     tocList.forEach((v) => {
@@ -28,6 +29,8 @@ const TOC = (markdown_content, toc) => {
     const update = () => {
         if (window.scrollY > visualViewport.height / 100 * 46.25) {
             toc.classList.remove('hide');
+            backToTopButton?.classList?.remove('hide');
+            backToTopButton?.setAttribute('hidden', false);
             for (let i = 0; i < tocArr.length; i++) {
                 let v = tocArr[i];
                 let rect = v.getBoundingClientRect();
@@ -41,8 +44,18 @@ const TOC = (markdown_content, toc) => {
             }
         } else {
             toc.classList.add('hide');
+            backToTopButton?.classList?.add('hide');
         }
+        console.log(backToTopButton);
     }
+
+    backToTopButton?.addEventListener("click",()=>{
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    })
+
     let ticking = false;
     window.addEventListener("scroll", () => {
         if (!ticking) {
