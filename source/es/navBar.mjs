@@ -1,4 +1,3 @@
-import Reload from "./smoothNav.mjs";
 import { onPageProcess } from "./ui.mjs";
 
 export function navBarInit() {
@@ -152,7 +151,7 @@ function search() {
             results.forEach(v => {
                 resultContainer.innerHTML += `<a class="--smooth" href=/${v[0]}><b>${v[1]}</b><span>${v[0]}</span></a>`;
             });
-            Reload.applyTo('a.--smooth', onPageProcess);
+            window?.__smoothNavigator?.applyTo('a.--smooth', onPageProcess);
         }
         await leastTimer;
         shouldRun = true;

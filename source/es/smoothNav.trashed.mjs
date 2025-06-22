@@ -1,38 +1,9 @@
 const DOMParserI = new DOMParser();
 
-export class SmoothNavigator {
-    targetDocument;
-    passedLocations = [];
-    defaultCallback;
-    /**
-     * 
-     * @param {Window} targetWindow 
-     * @param {Function} callback 
-     */
-    constructor(targetWindow, callback) {
-        this.targetDocument = targetWindow.document;
-        this.defaultCallback = callback;
-        this.passedLocations.push(targetWindow.location.href);
-        targetWindow.addEventListener('popstate', () => {
-            this.passedLocations.pop();
-            if (!this.passedLocations.length) return;
-            this.navigate(this.passedLocations[this.passedLocations.length - 1], this.defaultCallback, { isBack: true });
-        });
-    }
-
-    async navigate(url, callback, {
-        isBack = false,
-        scrollToTop = true,
-    } = {}) {
-        const document = this.targetDocument;
-        document.body.classList.add(`being-replaced`);
-        if (scrollToTop) {
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: `smooth`,
-            });
-        }
+const Reload = {
+    goTo: async function (url, isBack = false, callback) {
+        document.body.classList.add('being-replaced');
+        scrollToTop();
         let NEO_REPLACE_NODE = document.querySelector('#NEO_REPLACE');
         document.querySelector('header.global').classList.remove('collapsed');
         let least_timer = new Promise(resolve => setTimeout(resolve, 250)), lang_timer = new Promise(resolve => setTimeout(resolve, 500));
@@ -44,12 +15,10 @@ export class SmoothNavigator {
         }
         await least_timer;
         // set url
-        if (!isBack) this.passedLocations.push(url);
+        if (!isBack) passedLocation.push(url);
         window.history[isBack ? 'replaceState' : 'pushState']('', '', url);
         // process head.
         document.head.querySelector('title').innerHTML = newDocument.head.querySelector('title').innerHTML;
-        document.head.querySelectorAll('meta').forEach(el => el.remove());
-        newDocument.head.querySelectorAll('meta').forEach(el => document.head.appendChild(el));
         // process multi-language
         if (targetLanguage != currentLanguage) {
             try {
@@ -72,15 +41,16 @@ export class SmoothNavigator {
         document.body.classList.remove('not-ready');
         // scroll pos
         callback();
-    }
-    applyTo(selectors, callback) {
-        const document = this.targetDocument;
+    },
+    applyTo: function (selectors, callback) {
         document.querySelectorAll(selectors).forEach(el => {
             el.addEventListener('click', (e) => {
                 e.preventDefault();
-                this.navigate(el.href, callback);
+                Reload.goTo(el.href, undefined, callback);
             })
             el.classList.remove('--smooth');
         })
     }
 }
+
+export default Reload;

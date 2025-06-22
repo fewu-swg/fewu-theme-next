@@ -1,7 +1,7 @@
 import { navBarInit } from './navBar.mjs';
 import { toc } from './toc.mjs';
 import { findAndInitGiscus } from './giscus.mjs';
-import Reload from './smoothNav.mjs';
+import { SmoothNavigator } from './smoothNav.mjs';
 
 function isSpider() {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -18,15 +18,7 @@ function isSpider() {
 })(window);
 
 if (!isSpider()) {
-    (function (window) {
-        window.passedLocation = [window.location.href];
-        window.onpopstate = function () {
-            passedLocation.pop();
-            if (!passedLocation.length) return;
-            window.Reload.goTo(passedLocation[passedLocation.length - 1], true, onPageProcess);
-        };
-        window.Reload = Reload;
-    })(window, void 0);
+    window.__smoothNavigator = new SmoothNavigator(window, onPageProcess);
 }
 
 export function onPageProcess() {
@@ -38,7 +30,7 @@ export function onPageProcess() {
     // NavigationBar
     navBarInit();
     // Smooth Navigate
-    Reload.applyTo('a:is(.--smooth,.__)', onPageProcess);
+    window.__smoothNavigator.applyTo('a:is(.--smooth,.__)', onPageProcess);
     // highlight
     setTimeout(() => {
         if (window.hljs) {
@@ -99,5 +91,8 @@ window.addEventListener('load', () => {
 document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('meta[data-nosplash="1"]') && window.location.href.endsWith('/')) {
         history.replaceState('', '', window.location.href.slice(0, window.location.href.length - 1));
+    }
+    else     if (document.querySelector('meta[data-nosplash="1"]') && window.location.href.endsWith('/index.html')) {
+        history.replaceState('', '', window.location.href.slice(0, window.location.href.length - 11));
     }
 })
