@@ -1,0 +1,88 @@
+.side.user-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include noLinkUnderline;
+
+    &>.userName {
+        line-height: 1.25;
+        position: relative;
+        display: block;
+        text-align: center;
+        margin: .75rem;
+        margin-bottom: 2rem;
+        cursor: pointer;
+        width: fit-content;
+
+        &>a {
+            transition: color .25s ease-in-out;
+            color: var(--Ctext-100);
+            font-weight: bold;
+        }
+
+        &:hover>a {
+            color: var(--Cbrand);
+        }
+
+        &:hover::after {
+            transform: translateX(-.5rem);
+            width: 2rem;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: calc(100% + .5rem);
+            height: .25rem;
+            left: calc(50% - .5rem);
+            width: 1rem;
+            background-color: var(--Cbrand);
+            border-radius: $card-corner-circle;
+            pointer-events: none;
+            @include transition([transform width]);
+        }
+
+    }
+
+    & .avatar {
+        width: 15.5rem;
+        height: 15.5rem;
+        object-fit: cover;
+        object-position: center;
+        border-radius: $card-corner-75;
+    }
+
+    & .intro {
+        margin: 0 .75rem;
+        color: var(--Ctext-50);
+    }
+
+    .socialLinks {
+        display: flex;
+        align-items: center;
+        margin: 1rem 1rem 0;
+        gap: 1rem;
+
+        & .link {
+            height: 2.5rem;
+            width: 2.5rem;
+            font-size: 1.5rem;
+            border-radius: $card-corner-75;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--Cbtn-content);
+            background-color: var(--Cbtn-regular-bg);
+            transition: background-color .25s ease-in-out;
+
+            & svg {
+                height: 1em;
+            }
+
+            &:hover {
+                background-color: var(--Cbtn-regular-bg-hover);
+            }
+        }
+    }
+}
