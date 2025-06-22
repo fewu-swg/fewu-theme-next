@@ -1,3 +1,17 @@
+const backToTop = () => {
+    let backToTopButton = document.querySelector('#backToTopButton');
+    backToTopButton.classList.add('hide');
+    backToTopButton?.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    })
+    return {
+        element: backToTopButton
+    }
+}
+
 const TOC = (markdown_content, toc) => {
     if (!markdown_content) {
         console.error(`No {markdown_content} specified.`);
@@ -7,14 +21,14 @@ const TOC = (markdown_content, toc) => {
         console.error(`No {toc} specified.`);
         return;
     }
-    let backToTopButton = document.querySelector('#backToTopButton');
+    let { element: backToTopButton } = backToTop();
     let tocList = markdown_content.querySelectorAll("h2, h3, h4, h5, h6");
     let liList = [];
     tocList.forEach((v) => {
         const H = v.nodeName[1];
         let li = document.createElement('li');
         li.classList.add(`li-${H}`);
-        v.id = v.textContent.replace(/ /g,'_');
+        v.id = v.textContent.replace(/ /g, '_');
         li.textContent = v.textContent;
         li.addEventListener("click", () => {
             window.scrollBy({ top: v.getBoundingClientRect().y, behavior: "smooth" });
@@ -46,15 +60,7 @@ const TOC = (markdown_content, toc) => {
             toc.classList.add('hide');
             backToTopButton?.classList?.add('hide');
         }
-        console.log(backToTopButton);
     }
-
-    backToTopButton?.addEventListener("click",()=>{
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    })
 
     let ticking = false;
     window.addEventListener("scroll", () => {
