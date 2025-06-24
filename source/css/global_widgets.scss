@@ -1,7 +1,10 @@
 @use "./_declaration.scss" as *;
 
-@import "./common_widgets/labeled-card";
-@import "./common_widgets/post-meta";
+@use "./common_widgets/labeled-card" as labeled-card;
+@use "./common_widgets/post-meta" as post-meta;
+
+@include labeled-card.use;
+@include post-meta.use;
 
 .banner {
     display: flex;

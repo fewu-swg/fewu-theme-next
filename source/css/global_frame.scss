@@ -1,4 +1,8 @@
 @use "_declaration.scss" as *;
+@use "./frame_widgets/header_widget" as header-widget;
+@use "./frame_widgets/footer_widget" as footer-widget;
+@use "./frame_widgets/back-to-top_widget" as back-to-top-widget;
+@use "./frame_widgets/loading-circle_widget" as loading-circle-widget;
 
 :root {
     --color-selection-bar: linear-gradient(to right, oklch(.7 .1 0), oklch(.7 .1 30), oklch(.7 .1 60), oklch(.7 .1 90), oklch(.7 .1 120), oklch(.7 .1 150), oklch(.7 .1 180), oklch(.7 .1 210), oklch(.7 .1 240), oklch(.7 .1 270), oklch(.7 .1 300), oklch(.7 .1 330), oklch(.7 .1 360));
@@ -51,10 +55,10 @@
     }
 }
 
-@import "./frame_widgets/header_widget";
-@import "./frame_widgets/footer_widget";
-@import "./frame_widgets/back-to-top_widget";
-@import "./frame_widgets/loading-circle_widget";
+@include header-widget.use;
+@include footer-widget.use;
+@include back-to-top-widget.use;
+@include loading-circle-widget.use;
 
 .post-card {
     display: flex;
@@ -205,6 +209,7 @@
     .mainCon>.index-ul {
         gap: 0;
     }
+
     .mainCon>.index-ul>li {
 
         &>.post-card {
@@ -214,18 +219,22 @@
         &:first-child>.post-card {
             border-radius: $card-corner $card-corner 0 0;
         }
+
         &:last-child>.post-card {
             border-radius: 0 0 $card-corner $card-corner;
         }
     }
+
     .post-card {
         flex-direction: column-reverse;
         max-height: 35rem;
 
-        &>.contentBox, &.image>.contentBox {
+        &>.contentBox,
+        &.image>.contentBox {
             padding: .5rem .75rem;
             width: 100%;
             max-width: 100%;
+
             &>.title>a>h2 {
                 text-wrap: wrap;
             }
@@ -250,9 +259,11 @@
                 height: unset;
             }
         }
+
         & .post-meta {
             font-size: .875rem;
         }
+
         & .post-meta .tag {
             display: none;
         }
