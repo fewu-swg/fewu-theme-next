@@ -2,7 +2,7 @@ extends global_layout.pug
 
 append head
     meta(name="description",content=page.raw_excerpt)
-    //- meta(name="author", content=page.properties.author||ctx.config.author||ctx.config.name)
+    meta(name="keywords",content=(post.properties.keywords||(post.categories.concat(post.tags))).join(" "))
     meta(name="og:site_name",content=ctx.config.title)
     meta(name="og:url",content=ctx.config.url+url_for(page.relative_path))
     meta(name="og:type",content="article")
