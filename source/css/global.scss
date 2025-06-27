@@ -69,11 +69,13 @@
 body {
     width: 100vw;
     overflow-x: hidden;
-    background: var(--Cbg);
-    color: var(--Cdisplay);
     margin: 0;
+    padding: 0;
     position: relative;
-    font-family: Roboto, sans-serif, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji"
+    font-family: Roboto, sans-serif, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+    color-scheme: light dark;
+    color: var(--Ctext-100);
+    background: var(--Cbg);
 }
 
 body::before {
@@ -107,14 +109,6 @@ html::-webkit-scrollbar {
 
 html {
     scrollbar-width: none
-}
-
-body {
-    color-scheme: light dark;
-    background-color: var(--Cbg);
-    color: var(--Ctext-100);
-    margin: 0;
-    padding: 0;
 }
 
 body.not-ready {
@@ -197,6 +191,10 @@ body.being-replaced #NEO_REPLACE {
     opacity: 0;
     transform: scale(1.1);
     top: 7rem;
+}
+
+body.js-disabled #NEO_MAIN {
+    margin-top: 1rem;
 }
 
 svg path, symbol path {
