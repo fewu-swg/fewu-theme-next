@@ -1,7 +1,7 @@
 extends global_layout.pug
 
 append head
-    meta(name="description",content=ctx.config.descripiton || ctx.config.note)
+    meta(name="description",content=ctx.config.description || ctx.config.note)
     title #{ctx.config.title}#{ctx.config.additional_title ? ' - ' + ctx.config.additional_title : ''}
 
 block content
