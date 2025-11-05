@@ -1,7 +1,7 @@
 {
   "name": "@fewu-swg/fewu-theme-next",
-  "version": "1.2.7",
-  "description": "The NEXT theme, default theme for Fewu.",
+  "version": "1.2.8",
+  "description": "The NEXT theme, default theme for Fewu. Inspired by Fuwari",
   "license": "GPL-2.0-only",
   "author": "0xarch",
   "type": "module",
