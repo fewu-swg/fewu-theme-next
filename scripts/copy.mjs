@@ -19,7 +19,7 @@ export default function (ctx) {
         referencedImages.forEach(v => {
             if (!regExps.MATCH_WEB_URL.test(v)) {
                 let originPath = join(dirname(post.full_source), v);
-                let targetPath = join(dirname(post.path), v);
+                let targetPath = join(ctx.PUBLIC_DIRECTORY,post.relative_path, v);
                 // let fallbackTargetPath = join(post.path, v);
                 cp(originPath, targetPath, (err) => {
                     if (err) {
