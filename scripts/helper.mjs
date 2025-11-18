@@ -63,7 +63,8 @@ export default function (ctx) {
         _i18n: _i18n(ctx),
         _i18n_lang(current){
             return languages[current];
-        }
+        },
+        filter_hidden: (posts) => posts.filter(v=>!v.properties.hidden)
     };
     ctx.extend.helpers.array_unique = (array) => [... new Set(array)]
     Object.assign(ctx.extend.helpers,helpers);

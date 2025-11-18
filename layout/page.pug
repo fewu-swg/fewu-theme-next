@@ -6,7 +6,7 @@ append head
 
 block content
     ul.index-ul
-        each post in site.posts.slice(page.current*10,page.current*10+10)
+        each post in filter_hidden(site.posts).slice(page.current*10,page.current*10+10)
             li
                 +post-card(post)
     +page-navigator(page.total,page.current,'page')
