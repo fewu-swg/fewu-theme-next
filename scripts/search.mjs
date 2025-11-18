@@ -1,4 +1,4 @@
-import { writeFile } from "fs";
+import { writeFile } from "fs/promises";
 import { join } from "path";
 
 export default function search(ctx) {
@@ -6,12 +6,14 @@ export default function search(ctx) {
     ctx.data.posts.forEach(v => {
         search[v.relative_path] = {
             t: v.title,
-            c: v.raw.replace(/\n+/g,' ')
+            c: v.raw.replace(/\n+/g, ' ')
         };
     });
-    writeFile(join(ctx.PUBLIC_DIRECTORY, 'search.json'), JSON.stringify(search), (err) => {
-        if (err) {
-            console.error(err);
-        }
+    ctx.on('afterDeploy', async (ctx) => {
+        await writeFile(join(ctx.PUBLIC_DIRECTORY, 'search.json'), JSON.stringify(search), (err) => {
+            if (err) {
+                console.error(err);
+            }
+        });
     });
 }
