@@ -80,4 +80,18 @@
             }
         }
     }
+
+    @media(min-width: 1024px) {
+        .side.category-list>.cates-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media(min-width: 768px) {
+        .side.category-list>.cates-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
 }
