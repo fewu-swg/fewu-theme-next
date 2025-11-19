@@ -159,7 +159,7 @@ function search() {
             }
             resultContainer.innerHTML = '';
             results.forEach(v => {
-                resultContainer.innerHTML += `<a class="--smooth" href=/${v[0]}><b>${v[1]}</b><span>${v[0]}</span></a>`;
+                resultContainer.innerHTML += `<a class="--smooth" href=${v[0].startsWith('/')?'':'/'}${v[0]}><b>${v[1]}</b><span>${v[0]}</span></a>`;
             });
             window?.__smoothNavigator?.applyTo('a.--smooth', onPageProcess);
         }

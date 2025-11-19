@@ -19,6 +19,7 @@
     --Ctext-25: #0000004d;
     --Ctext-50: #0000008d;
     --Ctext-75: #000000bf;
+    --Ctext-90: #000000e6;
     --Ctext-100: #000;
 
     @each $percent, $value in (100, $card-corner-100), (75, $card-corner-75), (50,$card-corner-50), (25,$card-corner-25) {
@@ -49,6 +50,7 @@
         --Ctext-25: #ffffff4d;
         --Ctext-50: #ffffff8d;
         --Ctext-75: #ffffffbf;
+        --Ctext-90: #ffffffe6;
         --Ctext-100: #fff;
 
         --Ccard-bg: oklch(.23 .015 var(--hue));
@@ -64,7 +66,14 @@
 
 @media(max-width:768px) {
     :root {
-        --Wpage-width: 100vw
+        --Wpage-width: 100vw;
+        font-size: 13px;
+    }
+}
+
+@media(max-width:1024px) {
+    :root {
+        font-size: 15px;
     }
 }
 

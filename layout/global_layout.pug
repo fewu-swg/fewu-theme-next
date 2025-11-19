@@ -78,11 +78,11 @@ html(lang=page.language)
                         - }
                         input.scroller(value=default_value || 250,type='range',min=0,max=360,step=5,default=default_value) 
         main.no-anim#NEO_MAIN
+            if ctx.config.theme_next.banner && ctx.config.theme_next.banner.credit
+                +background-copyright(ctx.config.theme_next.banner.credit, ctx.config.theme_next.banner.credit_url)
             .sideCon#NEO_SIDE
                 include side_widget.pug
             .mainCon#NEO_REPLACE
-                if ctx.config.theme_next.banner && ctx.config.theme_next.banner.credit
-                    +background-copyright(ctx.config.theme_next.banner.credit, ctx.config.theme_next.banner.credit_url)
                 block content
         footer.global
             .copyright-content

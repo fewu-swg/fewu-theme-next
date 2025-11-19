@@ -66,6 +66,11 @@
                 border-radius: $card-corner-50;
             }
 
+            & > svg {
+                color: var(--Ctext-50);
+                margin-left: .15rem;
+            }
+
             &:hover::before {
                 transform: scale(1);
                 opacity: 1;
@@ -165,7 +170,7 @@
                 position: absolute;
                 right: 1rem;
                 top: 90%;
-                height: 0%;
+                height: fit-content;
                 padding: .5rem;
                 gap: .25rem;
                 background-color: var(--Ccard-bg);
@@ -188,7 +193,6 @@
             }
 
             &.collapsed>.links {
-                height: 100%;
                 top: calc(100% + 1rem);
                 opacity: 1;
                 pointer-events: initial;

@@ -4,6 +4,7 @@ mixin post-card(item)
             header.title
                 a.--smooth(href=url_for(item.web_relative_path.toString()+'/'))
                     h2= item.title
+                        .after!= _icon('material-symbols:chevron_right','rounded')
             +post-meta(item)
             .excerpt!= item.excerpt.replace(/<a[\s\S]*?>[\s\S]*?<\/a>/,'')
             .length

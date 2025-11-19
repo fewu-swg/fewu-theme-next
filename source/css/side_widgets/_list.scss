@@ -39,7 +39,7 @@
         background-color: transparent;
         color: var(--Cbtn-content);
         border-radius: $card-corner-50;
-        height: 2rem;
+        height: 2.5rem;
         width: 100%;
         order: 3;
         display: flex;
@@ -93,15 +93,19 @@
 
             &::after {
                 content: attr(data-count);
-                color: var(--Cbtn-content);
-                background-color: var(--Cbtn-regular-bg);
+                color: var(--Cbtn-regular-bg);
+                background-color: var(--Cbtn-content);
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 1.5rem;
+                min-width: 1.8rem;
                 height: 1.5rem;
+                padding: 0 .2rem;
+                font-size: .9rem;
                 margin-left: auto;
                 border-radius: $card-corner-50;
+                font-family: var(--mono-font-family);
+                box-sizing: border-box;
             }
         }
     }
@@ -111,6 +115,7 @@
         flex-wrap: wrap;
         width: 100%;
         gap: .5rem;
+        font-size: .9rem;
 
         &>.tag {
             line-height: 1rem;
