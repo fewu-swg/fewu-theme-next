@@ -2,10 +2,19 @@
 
 @mixin use() {
     footer.global {
-        color: var(--Cdisplay);
         position: relative;
         max-width: var(--Wpage-width);
         margin: 4rem auto 2rem;
+
+        color: var(--Ctext-25);
+        text-align: center;
+        padding: 0 .25rem;
+
+        & a {
+            text-decoration: none;
+            font-weight: bold;
+            color: var(--Cbtn-content);
+        }
 
         &>.kLinks {
             display: flex;

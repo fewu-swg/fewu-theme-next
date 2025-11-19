@@ -128,15 +128,14 @@ code {
     color: var(--Cbtn-content);
     background-color: var(--Cbtn-regular-bg);
     border-radius: $card-corner-25;
-    font-family: 'Hack', monospace, 'monospace';
+    font-family: var(--mono-font-family);
 }
 
-pre code,
-pre code.hljs {
+pre code {
     display: block;
     padding: .5rem;
     background-color: var(--Cbg);
-    color: var(--Cdisplay);
+    color: var(--Ctext-100);
     border-radius: $card-corner-50;
     position: relative;
     font-size: 1rem;
@@ -149,11 +148,56 @@ pre code.hljs {
     overflow-x: auto;
 }
 
+pre code {
+
+    // built-in theme
+    .hljs-keyword {
+        color: #5d7afd;
+    }
+
+    .hljs-string {
+        color: #e79435;
+    }
+
+    .hljs-number {
+        color: #1fd619;
+    }
+
+    .hljs-meta {
+        color: #ee3bc1;
+    }
+
+    .hljs-property {
+        color: #f3d138;
+    }
+
+    .hljs-comment {
+        color: #80d499;
+    }
+
+    .hljs-title {
+        color: rgb(199, 163, 2);
+    }
+
+    .hljs-title.class_ {
+        color: rgb(43, 192, 38);
+    }
+
+    .hljs-variable,.hljs-attr {
+        color: #4296bd;
+    }
+
+    .hljs-literal {
+        color: rgb(202, 70, 235);
+    }
+}
+
 pre {
     position: relative;
     padding-left: 2rem;
     border-radius: $card-corner-50;
     background-color: var(--Cbg);
+    font-family: var(--mono-font-family);
 }
 
 pre>.line-index {

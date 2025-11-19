@@ -32,6 +32,8 @@
     --card-shadow: #{$card-shadow};
     --card-padding: #{$card-padding};
     --top-banner-height: 40vh;
+    --font-family: Roboto, sans-serif, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+    --mono-font-family: 'Jetbrains Mono', 'Hack', Hack, 'monospace', monospace;
 }
 
 @media(prefers-color-scheme:dark) {
@@ -57,7 +59,6 @@
     :root {
         --text-color: white;
         --bg-color: black;
-
     }
 }
 
@@ -73,10 +74,10 @@ body {
     margin: 0;
     padding: 0;
     position: relative;
-    font-family: Roboto, sans-serif, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+    font-family: var(--font-family);
     color-scheme: light dark;
-    color: var(--Ctext-100);
-    background: var(--Cbg);
+    color: var(--Ctext-100) !important;
+    background: var(--Cbg) !important;
 }
 
 body::before {

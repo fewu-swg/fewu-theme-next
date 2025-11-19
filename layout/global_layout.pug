@@ -32,6 +32,7 @@ html(lang=page.language)
             link(rel='stylesheet',href=url_for('css/global_frame.css'))
             link(rel='stylesheet',href=url_for('css/global_page.css'))
             link(rel='stylesheet',href=url_for('css/admon-extra.css'))
+            link(rel="stylesheet",href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css")
             script(type="module",defer="true",src=url_for('es/ui.mjs'))
 
     body(class='dom-loaded main-anim-finished js-disabled',OCP='OVERRIDE')
@@ -84,3 +85,10 @@ html(lang=page.language)
                     +background-copyright(ctx.config.theme_next.banner.credit, ctx.config.theme_next.banner.credit_url)
                 block content
         footer.global
+            .copyright-content
+                span.user-content!= ctx.config.footer_content
+                br
+                span Powered by 
+                    a(href='https://github.com/fewu-swg/fewu') Fewu
+                    = ' & '
+                    a(href='https://github.com/fewu-swg/fewu-theme-next') Next
