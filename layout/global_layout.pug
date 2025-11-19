@@ -7,6 +7,7 @@ include components/multi-language.pug
 include components/giscus.pug
 include components/back-to-top.pug
 include components/loading-circle.pug
+include components/background-copyright.pug
 
 - clear_build()
 
@@ -67,5 +68,7 @@ html(lang=page.language)
             .sideCon#NEO_SIDE
                 include side_widget.pug
             .mainCon#NEO_REPLACE
+                if ctx.config.banner && ctx.config.banner.credit
+                    +background-copyright(ctx.config.banner.credit, ctx.config.banner.credit_url)
                 block content
         footer.global

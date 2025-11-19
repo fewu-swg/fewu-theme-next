@@ -7,9 +7,18 @@ append head
     title #{ctx.config.title}#{ctx.config.additional_title ? ' - ' + ctx.config.additional_title : ''}
 
 block content
+    style#INDEX_BEACON.
+        :root {
+            --top-banner-margin: 64vh;
+        }
+        @media(max-width:768px) {
+            :root {
+                --top-banner-margin: 40vh;
+            }
+        }
     h1(hidden=true)= ctx.config.title
     ul.index-ul
         each post in filter_hidden(site.posts).slice(page.current*10,page.current*10+10)
             li
                 +post-card(post)
-    +page-navigator(Math.ceil(filter_hidden(site.posts).length/10),page.current,'page')
+    +page-navigator(Math.ceil(filter_hidden(site.posts).length/10),page.current,'page',true)

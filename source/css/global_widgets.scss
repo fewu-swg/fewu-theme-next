@@ -2,16 +2,18 @@
 
 @use "./common_widgets/labeled-card" as labeled-card;
 @use "./common_widgets/post-meta" as post-meta;
+@use "./common_widgets/post-card" as post-card;
 
 @include labeled-card.use;
 @include post-meta.use;
+@include post-card.use;
 
 .banner {
     display: flex;
     align-items: center;
     color: var(--Ctext-75);
     background-color: var(--Cbtn-regular-bg);
-    margin: 1rem var(--banner-vertical-align,-1rem);
+    margin: 1rem var(--banner-vertical-align, -1rem);
     padding: 1rem calc(-1 * var(--banner-vertical-align, -1rem));
     box-sizing: border-box;
 
@@ -29,4 +31,51 @@
     padding: $card-padding;
     background-color: var(--Cbg);
     border-radius: $card-corner-75;
+}
+
+.background-copyright {
+    text-decoration: none;
+    position: absolute;
+    height: 2rem;
+    top: -3rem;
+    background-color: #0000008d;
+    backdrop-filter: blur(10px);
+    border-radius: 999vmax;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: .5rem;
+    gap: .5rem;
+
+    right: 0;
+
+    &>.copyright-logo,&>.link-icon {
+        height: 1rem;
+    }
+
+    &>.copyright-name {
+        font-size: .85rem;
+        line-height: 1rem;
+    }
+
+    & svg {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    &>.link-icon>svg {
+        overflow: hidden;
+        opacity: 0;
+        width: 0;
+        @include transition([opacity width]);
+        color: var(--Cbtn-content);
+
+    }
+
+    &:hover>.link-icon>svg {
+        opacity: .85;
+        width: 1rem;
+    }
 }

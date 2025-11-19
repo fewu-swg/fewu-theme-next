@@ -9,4 +9,4 @@ block content
         each post in filter_hidden(site.posts).slice(page.current*10,page.current*10+10)
             li
                 +post-card(post)
-    +page-navigator(page.total,page.current,'page')
+    +page-navigator(page.total,page.current,'page',true)

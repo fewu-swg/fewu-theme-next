@@ -31,6 +31,7 @@
     --card-corner-circle: #{$card-corner-circle};
     --card-shadow: #{$card-shadow};
     --card-padding: #{$card-padding};
+    --top-banner-height: 40vh;
 }
 
 @media(prefers-color-scheme:dark) {
@@ -81,10 +82,10 @@ body {
 body::before {
     content: '';
     position: absolute;
-    background-image: url("/banner.webp");
+    background-image: url($banner-image);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 46.25vh;
+    height: var(--top-banner-margin,var(--top-banner-height));
     width: 100%;
     background-position: center;
     pointer-events: none;
@@ -93,7 +94,7 @@ body::before {
     transform: scale(1.1);
     top: 2rem;
     transition-property: opacity, top, transform, height;
-    transition-duration: .25s;
+    transition-duration: .35s;
     transition-timing-function: ease-in-out;
 }
 
@@ -120,7 +121,7 @@ body.not-ready {
     flex-direction: column-reverse;
     gap: $card-gap;
     max-width: var(--Wpage-width);
-    margin: calc(37.75vh - 4.5rem) auto 0;
+    margin: calc(var(--top-banner-margin,var(--top-banner-height)) - 9.5rem) auto 0;
 }
 
 #NEO_MAIN>:is(.mainCon, .sideCon),
@@ -156,7 +157,7 @@ body.not-ready {
         transform: none;
         position: relative;
         transition-property: opacity, transform, top, margin;
-        transition-duration: .149s;
+        transition-duration: .35s;
         transition-timing-function: ease-in-out;
     }
 

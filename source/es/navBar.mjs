@@ -1,13 +1,22 @@
 import { onPageProcess } from "./ui.mjs";
 
+export const sharedObject = {
+    vh: 46
+}
+
 export function navBarInit() {
     try {
+        if(location.pathname=='/'){
+            sharedObject.vh = 64;
+        } else {
+            sharedObject.vh = 40;
+        }
         const NAV_ROOT = document.querySelector('header.global');
         // Global Focus
         let lastKnownScrollPosition = 0;
         let ticking = false;
         function NavFloatToggle(scrollPos) {
-            if (scrollPos >= visualViewport.height / 100 * 37.75 - 5.5 * SINGLE_REM) {
+            if (scrollPos >= visualViewport.height / 100 * sharedObject.vh - 9.5 * SINGLE_REM) {
                 document.body.classList.add('focus');
             } else {
                 document.body.classList.remove('focus');
@@ -75,7 +84,7 @@ function hamburger() {
 function palette() {
     let paletteButton = document.getElementById('headerButtonPalette');
     let palettePanel = document.getElementById('headerComponentPalette');
-    __listen(paletteButton, palettePanel,(on)=>{
+    __listen(paletteButton, palettePanel, (on) => {
         palettePanel.classList[on ? 'add' : 'remove']('on');
     });
     let numberShower = palettePanel.querySelector('.number-show');

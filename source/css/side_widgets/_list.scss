@@ -47,14 +47,12 @@
         justify-content: center;
         margin: 0;
         margin-top: .5rem;
-        font-size: 1.75rem;
+        font-size: 1.15rem;
         @include transition([background-color]);
 
         &:hover {
             background-color: var(--Cbtn-regular-bg-hover);
         }
-
-
     }
 
     #cate-expand-ccb:checked+.cates-expand-label {
