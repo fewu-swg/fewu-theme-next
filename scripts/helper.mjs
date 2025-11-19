@@ -18,7 +18,7 @@ export default function (ctx) {
             if(str.startsWith('fa-brand:')){
                 return get_fa_brand(str.replace('fa-brand:',''));
             } else if(str.startsWith('material-symbols:') && type) {
-                return get_material_symbols(str.replace('material-symbols:',''),type);
+                return get_material_symbols(ctx.config?.theme_next?.icon_weight ?? 600,str.replace('material-symbols:',''),type);
             } else {
                 console.log(`Deprecated or unknown svgs used while getting ${str}!`);
                 return ``;

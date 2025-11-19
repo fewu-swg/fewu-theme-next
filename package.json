@@ -1,6 +1,6 @@
 {
   "name": "@fewu-swg/fewu-theme-next",
-  "version": "1.2.15",
+  "version": "1.2.16",
   "description": "The NEXT theme, default theme for Fewu. Inspired by Fuwari",
   "license": "GPL-2.0-only",
   "author": "0xarch",
@@ -9,7 +9,7 @@
     "@fewu-swg/fewu-deployer-sass": "^1.0.5",
     "@fewu-swg/fewu-renderer-pug": "^1.2.0",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
-    "@material-symbols/svg-400": "^0.31.9"
+    "@material-symbols/svg-600": "^0.31.9"
   },
   "publishConfig": {
     "access": "public"
