@@ -76,6 +76,7 @@
         }
 
         &>.cate {
+            line-height: 1rem;
             border-radius: $card-corner-50;
             display: flex;
             padding: .5rem;
@@ -112,6 +113,7 @@
         gap: .5rem;
 
         &>.tag {
+            line-height: 1rem;
             border-radius: $card-corner-50;
             display: block;
             padding: .5rem;
