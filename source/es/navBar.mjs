@@ -6,7 +6,7 @@ export const sharedObject = {
 
 export function navBarInit() {
     try {
-        if(location.pathname=='/'){
+        if (location.pathname == '/') {
             sharedObject.vh = 64;
         } else {
             sharedObject.vh = 40;
@@ -91,20 +91,21 @@ function palette() {
     let resetter = palettePanel.querySelector('.reset-button');
     let inputer = palettePanel.querySelector('input.scroller');
     let docRoot = document.querySelector(':root');
+    let defaultValue = inputer.getAttribute('default');
     if (localStorage.getItem('0xarch.github.io/color-hue')) {
         let hue = localStorage.getItem('0xarch.github.io/color-hue');
         numberShower.innerHTML = hue;
         docRoot.style.setProperty('--config-hue', hue);
         inputer.value = parseInt(hue);
     } else {
-        numberShower.innerHTML = 250;
-        inputer.value = 250;
+        numberShower.innerHTML = defaultValue;
+        inputer.value = defaultValue;
     };
     resetter.addEventListener('click', () => {
-        numberShower.innerHTML = '250';
+        numberShower.innerHTML = defaultValue;
         localStorage.removeItem('0xarch.github.io/color-hue');
-        docRoot.style.setProperty('--config-hue', 250);
-        inputer.value = 250;
+        docRoot.style.setProperty('--config-hue', defaultValue);
+        inputer.value = defaultValue;
     })
     inputer.addEventListener('input', () => {
         numberShower.innerHTML = inputer.value;
