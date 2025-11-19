@@ -19,10 +19,12 @@ html(lang=page.language)
             meta(charset='utf-8')
             meta(name="darkreader-lock")
             meta(name="viewport",content="width:device-width,initial-scale=1.0")
-            meta(name="author" content=page.author||ctx.config.author||ctx.config.name)
+            meta(name="author",content=page.author||ctx.config.author||ctx.config.name)
             style.
                 body:not(.js-disabled){visibility: hidden}
-                :root { --hue: var(--config-hue, 250); background: oklch(.16 .014 var(--hue)) }
+                :root { --hue: var(--config-hue); background: oklch(.16 .014 var(--hue)) }
+            script(type='module').
+                let p=!{ctx.config.theme_next&&ctx.config.theme_next.accent_color||250}; let d='0xarch.github.io/color-hue'; if (localStorage.getItem(d)) { let h = localStorage.getItem(d); if(h||h===0) p=h } document.documentElement.style.setProperty('--config-hue', p)
             link(rel="icon",href=url_for("icon.svg"))
             link(rel='stylesheet',href=url_for('css/global.css'))
             link(rel='stylesheet',href=url_for('css/global_side.css'))
