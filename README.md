@@ -12,23 +12,23 @@ This is the default theme for Fewu 3. Inspired by [Fuwari theme for Astro](https
 
 Install `fewu-cli`:
 ```shell
-npm i fewu-cli
+pnpm add fewu-cli
 ```
 
 Initialize workspace:
 ```shell
-npx fewu init
+pnpm fewu init
 ```
 
 Download theme and dependencies:
 ```shell
-npm i
+pnpm i
 ```
 
 ### Through NPM
 
 ```shell
-npm i @fewu-swg/fewu-theme-next
+pnpm add @fewu-swg/fewu-theme-next
 ```
 
 ### Through Git
@@ -40,16 +40,16 @@ git clone https://github.com/fewu-swg/fewu-theme-next themes/next
 Install dependencies:
 
 ```sh
-npm i -S @fortawesome/free-brands-svg-icons @material-symbols/svg-400
+pnpm add @fortawesome/free-brands-svg-icons @material-symbols/svg-400
 ```
 
-Or copy this `package.json` to working directory (where you put `config.yaml`) then execute `npm i`.
+Or copy this `package.json` to working directory (where you put `config.yaml`) then execute `pnpm i`.
 
 ```json
 {
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
-    "@material-symbols/svg-400": "^0.27.2"
+    "@material-symbols/svg-600": "^0.27.2"
   }
 }
 ```
@@ -67,19 +67,24 @@ Or copy this `package.json` to working directory (where you put `config.yaml`) t
 ## Dependencies
 
 * (npm) @fortawesome/free-brands-svg-icons
-* (npm) @material-symbols/svg-400
+* (npm) @material-symbols/svg-600
 
 ## Configurations
 
 ### Custom Navigate
 
-Add `additional_navs` (`Record<string,string>) to your configuration file,
-The key (name) must be a string, the value must be a absolute url, the url will be directly filled into `href`
+Add `theme_next.additional_navs` (`Record<string,string>`) to your configuration file,
+The key (name) must be a string, the value should be a url or Object, the url will be directly filled into `href`. For Object, see below.
 
 Default, the key will be translated if it's been found in the translations file. Keys start with `^` will not be translated and the starting `^` will be removed.
 
 ```yaml
-additional_navs:
-  ^About: /posts/about.md # Will not be translated
-  About: /posts/about.md # Will be translated
+theme_next:
+  additional_navs:
+    ^About: /posts/about.md # Will not be translated
+    About: /posts/about.md # Will be translated
+    GitHub:
+      isExternal: true # Whether not to use senseless page navigating
+      title: GitHub # title, will not be translated
+      url: https://github.com/ # URL
 ```
