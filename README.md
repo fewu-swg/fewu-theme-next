@@ -40,7 +40,7 @@ git clone https://github.com/fewu-swg/fewu-theme-next themes/next
 Install dependencies:
 
 ```sh
-pnpm add @fortawesome/free-brands-svg-icons @material-symbols/svg-400
+pnpm add @fortawesome/free-brands-svg-icons @material-symbols/svg-600
 ```
 
 Or copy this `package.json` to working directory (where you put `config.yaml`) then execute `pnpm i`.
@@ -69,11 +69,21 @@ Or copy this `package.json` to working directory (where you put `config.yaml`) t
 * (npm) @fortawesome/free-brands-svg-icons
 * (npm) @material-symbols/svg-600
 
+## Article Features
+
+All the following properties should be specify in front-matter.
+
+`hidden: Boolean`: whether the article will be shown (This **CANNOT** prevent article from showing in categories/tags).
+
+`disable_comment: Boolean`: whether the Comment Plugin (Giscus) will be disabled.
+
+`disable_adjacent: Boolean`: whether the Adjacent Article Navigator (NextPage) will be disabled.
+
 ## Configurations
 
 ### Custom Navigate
 
-Add `theme_next.additional_navs` (`Record<string,string>`) to your configuration file,
+Add `theme_next.additional_navs` (`Record<string,string|object>`) to your configuration file,
 The key (name) must be a string, the value should be a url or Object, the url will be directly filled into `href`. For Object, see below.
 
 Default, the key will be translated if it's been found in the translations file. Keys start with `^` will not be translated and the starting `^` will be removed.
@@ -88,3 +98,25 @@ theme_next:
       title: GitHub # title, will not be translated
       url: https://github.com/ # URL
 ```
+
+### Accent Color
+
+Add `theme_next.accent_color` (`Number`) to define the default color of your site.
+
+```yaml
+theme_next:
+  accent_color: 250 # this is the default blue
+```
+
+### Banner Image
+
+Add `theme_next.banner` (`{url: string; credit: string; credit_url: string}`) to define custom banner image.
+
+If `theme_next.banner.credit` is specified, a copyright sign will be shown. If `theme_next.banner.credit_url` is specified, the sign will link to the specified URL.
+
+```yaml
+theme_next:
+  banner:
+    url: /banner.webp # URL
+    credit:
+    credit_url:

@@ -47,7 +47,6 @@
     justify-content: center;
     box-sizing: border-box;
     padding: .5rem;
-    gap: .5rem;
 
     right: 0;
 
@@ -58,6 +57,7 @@
     &>.copyright-name {
         font-size: .85rem;
         line-height: 1rem;
+        margin: 0 .5rem;
     }
 
     & svg {

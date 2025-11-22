@@ -40,7 +40,7 @@ git clone https://github.com/fewu-swg/fewu-theme-next themes/next
 处理依赖：
 
 ```sh
-pnpm add @fortawesome/free-brands-svg-icons @material-symbols/svg-400
+pnpm add @fortawesome/free-brands-svg-icons @material-symbols/svg-600
 ```
 
 或将此 `package.json` 复制到工作区下，然后执行 `pnpm i`：
@@ -69,6 +69,16 @@ pnpm add @fortawesome/free-brands-svg-icons @material-symbols/svg-400
 * (npm) @fortawesome/free-brands-svg-icons
 * (npm) @material-symbols/svg-600
 
+## 文章特性
+
+以下所有属性都应写在 front-matter 中，并仅对当前文章生效。
+
+`hidden: Boolean`: 文章是否隐藏（无法阻止文章显示在分类/标签下）。
+
+`disable_comment: Boolean`: 是否禁用评论插件（Giscus）。
+
+`disable_adjacent: Boolean`: 是否关闭临近文章导航（NextPage）。
+
 ## 配置
 
 ### 自定义导航栏
@@ -88,3 +98,25 @@ theme_next:
       title: GitHub # 标题，不会翻译
       url: https://github.com/ # URL
 ```
+
+### 强调色
+
+添加 `theme_next.accent_color` (`Number`) 以定义默认强调色。
+
+```yaml
+theme_next:
+  accent_color: 250 # 默认蓝色
+```
+
+### 头图
+
+添加 `theme_next.banner` (`{url: string; credit: string; credit_url: string}`) 来自定义头图
+
+如果 `theme_next.banner.credit` 存在，将会展示版权标识，如果 `theme_next.banner.credit_url` 也存在，那么标识将会指向此 URL。
+
+```yaml
+theme_next:
+  banner:
+    url: /banner.webp # URL
+    credit:
+    credit_url:

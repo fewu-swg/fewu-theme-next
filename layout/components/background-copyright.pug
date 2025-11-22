@@ -1,5 +1,6 @@
 mixin background-copyright(string,url)
-    a.background-copyright(href=url)
-        .copyright-logo!= _icon('material-symbols:copyright','rounded')
-        .copyright-name!= string
-        .link-icon!= _icon('material-symbols:open_in_new','rounded')
+        a.background-copyright(href=url)
+            .copyright-logo!= _icon('material-symbols:copyright','rounded')
+            .copyright-name!= string
+            if url
+                .link-icon!= _icon('material-symbols:open_in_new','rounded')
