@@ -9,21 +9,26 @@ mixin page-navigator(total,now,name,is_index)
                 a.prev(href=url_for(`/`),class='--smooth')!= _icon('material-symbols:chevron_right','rounded')
             else
                 a.prev(href=now>0?url_for(`/${name}/${now-1}`):void 0,class=(now>0)&&'--smooth')!= _icon('material-symbols:chevron_right','rounded')
-            a.--smooth(href=url_for(`/`),class=now==0&&'now')!= 1
+            
         else
             a.prev(href=now>0?url_for(`/${name}/${now-1}`):void 0,class=(now>0)&&'--smooth')!= _icon('material-symbols:chevron_right','rounded')
-            a.--smooth(href=url_for(`/${name}/0`),class=now==0&&'now')!= 1
+            
 
-        if total != 1
-            if now > 3
-                a.disabled ...
-            
-            for target in targets
-                a.--smooth(href=url_for(`/${name}/${target}`),class=target==now&&'now') #{target+1}
-            
-            if now < total - 4
-                a.disabled ...
-            
-            a.--smooth(href=url_for(`/${name}/${total-1}`),class=now==total-1&&'now')!= total
+        .pages
+            if is_index == true
+                a.--smooth(href=url_for(`/`),class=now==0&&'now')!= 1
+            else
+                a.--smooth(href=url_for(`/${name}/0`),class=now==0&&'now')!= 1
+            if total != 1
+                if now > 3
+                    a.disabled ...
+                
+                for target in targets
+                    a.--smooth(href=url_for(`/${name}/${target}`),class=target==now&&'now') #{target+1}
+                
+                if now < total - 4
+                    a.disabled ...
+                
+                a.--smooth(href=url_for(`/${name}/${total-1}`),class=now==total-1&&'now')!= total
         
         a.next(href=now<total-1?url_for(`/${name}/${now+1}`):void 0,class=(now<total-1)&&'--smooth')!= _icon('material-symbols:chevron_right','rounded')

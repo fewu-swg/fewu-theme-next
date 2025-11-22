@@ -2,6 +2,11 @@
 
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
 
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
 :root {
     color-scheme: light dark;
     font-family: Roboto, sans-serif, system-ui;

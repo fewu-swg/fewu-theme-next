@@ -8,7 +8,8 @@
     }
 
     @media(min-width: 1024px) {
-        $line-height: 1.35rem;
+        $line-height: 1.85rem;
+        $marker-height: 1.35rem;
 
         #markdown_TOC {
             position: fixed;
@@ -45,22 +46,24 @@
             height: #{$line-height};
             margin: .25rem 0;
             padding: .25rem;
+            display: flex;
+            align-items: center;
         }
 
         #markdown_TOC .li-2::before {
             counter-increment: toc_counter_h2;
             content: counter(toc_counter_h2);
             display: inline-block;
-            width: #{$line-height};
-            height: #{$line-height};
-            line-height: #{$line-height};
+            width: #{$marker-height};
+            height: #{$marker-height};
+            line-height: #{$marker-height};
             font-size: .75rem;
             margin-right: .5rem;
             border-radius: $card-corner-50;
             background-color: var(--Cbtn-regular-bg-hover);
             color: var(--Cbtn-content);
             text-align: center;
-            font-family: "Hack", "monospace", monospace;
+            font-family: var(--mono-font-family);
             vertical-align: top;
         }
 
@@ -71,6 +74,8 @@
                 height: 1.5rem;
                 margin: .25rem 0;
                 padding: .25rem;
+                display: flex;
+                align-items: center;
                 padding-left: calc(sqrt($level) * .25rem + .25rem);
             }
 

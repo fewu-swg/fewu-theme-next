@@ -1,5 +1,5 @@
-import { navBarInit } from './navBar.mjs';
-import { toc } from './toc.mjs';
+import { navBarCleanup, navBarInit } from './navBar.mjs';
+import { toc, tocCleanup } from './toc.mjs';
 import { findAndInitGiscus } from './giscus.mjs';
 import { SmoothNavigator } from './smoothNav.mjs';
 
@@ -18,7 +18,12 @@ function isSpider() {
 })(window);
 
 if (!isSpider()) {
-    window.__smoothNavigator = new SmoothNavigator(window, onPageProcess);
+    window.__smoothNavigator = new SmoothNavigator(window, onPageProcess, beforePageChange);
+}
+
+export function beforePageChange() {
+    navBarCleanup();
+    tocCleanup();
 }
 
 export function onPageProcess() {
@@ -30,7 +35,7 @@ export function onPageProcess() {
     // NavigationBar
     navBarInit();
     // Smooth Navigate
-    window.__smoothNavigator.applyTo('a:is(.--smooth,.__)', onPageProcess);
+    window.__smoothNavigator.applyTo('a:is(.--smooth,.__)', onPageProcess, (el) => el.classList.remove('--smooth', '__'));
     // highlight
     setTimeout(() => {
         if (window.hljs) {
@@ -92,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('meta[data-nosplash="1"]') && window.location.href.endsWith('/')) {
         history.replaceState('', '', window.location.href.slice(0, window.location.href.length - 1));
     }
-    else     if (document.querySelector('meta[data-nosplash="1"]') && window.location.href.endsWith('/index.html')) {
+    else if (document.querySelector('meta[data-nosplash="1"]') && window.location.href.endsWith('/index.html')) {
         history.replaceState('', '', window.location.href.slice(0, window.location.href.length - 11));
     }
 })

@@ -21,7 +21,8 @@ block content
         article#markdown_fillContent
             != page.content
         +license(page)
-    +giscus-widget(page)
+    if ! page.properties.disable_comment
+        +giscus-widget(page)
     .next-page
         - let is_latest = page.current == 0
         - let is_earliest = page.current == (page.total - 1)

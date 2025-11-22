@@ -4,14 +4,17 @@ export class SmoothNavigator {
     targetDocument;
     passedLocations = [];
     defaultCallback;
+    preCallback;
     /**
      * 
      * @param {Window} targetWindow 
      * @param {Function} callback 
+     * @param {Function?} precallback
      */
-    constructor(targetWindow, callback) {
+    constructor(targetWindow, callback, preCallback) {
         this.targetDocument = targetWindow.document;
         this.defaultCallback = callback;
+        this.preCallback = preCallback;
         this.passedLocations.push(targetWindow.location.href);
         targetWindow.addEventListener('popstate', () => {
             this.passedLocations.pop();
@@ -24,6 +27,7 @@ export class SmoothNavigator {
         isBack = false,
         scrollToTop = true,
     } = {}) {
+        await this.preCallback?.(url);
         const document = this.targetDocument;
         document.body.classList.add(`being-replaced`);
         if (scrollToTop) {
@@ -73,14 +77,14 @@ export class SmoothNavigator {
         // scroll pos
         callback();
     }
-    applyTo(selectors, callback) {
+    applyTo(selectors, callback, regCallback) {
         const document = this.targetDocument;
         document.querySelectorAll(selectors).forEach(el => {
             el.addEventListener('click', (e) => {
                 e.preventDefault();
                 this.navigate(el.href, callback);
             })
-            el.classList.remove('--smooth');
+            regCallback(el);
         })
     }
 }

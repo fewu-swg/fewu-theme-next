@@ -1,39 +1,51 @@
 import { onPageProcess } from "./ui.mjs";
 
+let lastKnownScrollPosition = 0;
+let toggleTicking = false;
+
 export const sharedObject = {
-    vh: 46
+    vh: 40,
+    mediaquery: undefined,
+    querylistener: (event) => {
+        if (event.matches) {
+            sharedObject.vh = 40;
+        } else {
+            sharedObject.vh = 64;
+        }
+    },
+    navtogglelistener: (event) => {
+        {
+            if (!toggleTicking) {
+                window.requestAnimationFrame(() => {
+                    if (window.scrollY != lastKnownScrollPosition) {
+                        if (window.scrollY >= visualViewport.height / 100 * sharedObject.vh - 10.5 * SINGLE_REM) {
+                            document.body.classList.add('focus');
+                        } else {
+                            document.body.classList.remove('focus');
+                        }
+                        lastKnownScrollPosition = window.scrollY;
+                    }
+                    toggleTicking = false;
+                });
+                toggleTicking = true;
+            }
+        }
+    }
 }
 
 export function navBarInit() {
     try {
         if (location.pathname == '/') {
-            sharedObject.vh = 64;
+            const mediaQuery = window.matchMedia('(max-width: 1024px)');
+            sharedObject.mediaquery = mediaQuery;
+            mediaQuery.addEventListener('change', sharedObject.querylistener);
+            sharedObject.vh = mediaQuery.matches ? 40 : 64;
         } else {
             sharedObject.vh = 40;
         }
         const NAV_ROOT = document.querySelector('header.global');
         // Global Focus
-        let lastKnownScrollPosition = 0;
-        let ticking = false;
-        function NavFloatToggle(scrollPos) {
-            if (scrollPos >= visualViewport.height / 100 * sharedObject.vh - 9.5 * SINGLE_REM) {
-                document.body.classList.add('focus');
-            } else {
-                document.body.classList.remove('focus');
-            }
-        }
-        document.addEventListener("scroll", () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    if (window.scrollY != lastKnownScrollPosition) {
-                        NavFloatToggle(window.scrollY);
-                        lastKnownScrollPosition = window.scrollY;
-                    }
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
+        document.addEventListener("scroll", sharedObject.navtogglelistener);
         palette();
         hamburger();
         search();
@@ -41,6 +53,11 @@ export function navBarInit() {
     } catch (e) {
         console.error(e);
     }
+}
+
+export function navBarCleanup() {
+    sharedObject.mediaquery?.removeEventListener("change", sharedObject.querylistener);
+    document.removeEventListener("scroll", sharedObject.navtogglelistener);
 }
 
 /**
@@ -159,7 +176,7 @@ function search() {
             }
             resultContainer.innerHTML = '';
             results.forEach(v => {
-                resultContainer.innerHTML += `<a class="--smooth" href=${v[0].startsWith('/')?'':'/'}${v[0]}><b>${v[1]}</b><span>${v[0]}</span></a>`;
+                resultContainer.innerHTML += `<a class="--smooth" href=${v[0].startsWith('/') ? '' : '/'}${v[0]}><b>${v[1]}</b><span>${v[0]}</span></a>`;
             });
             window?.__smoothNavigator?.applyTo('a.--smooth', onPageProcess);
         }

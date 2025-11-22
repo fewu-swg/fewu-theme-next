@@ -74,7 +74,7 @@
     align-items: center;
     gap: 1rem;
 
-    &>a {
+    &>a, &>.pages>a {
         text-decoration: none;
         display: flex;
         height: 3rem;
@@ -106,9 +106,18 @@
             color: var(--Ctext-25);
         }
 
-        &[href]:not(:now):hover {
+        &[href]:not(.now):hover {
             background-color: var(--Cbtn-plain-bg-hover);
         }
+    }
+
+    &>.pages {
+        display: flex;
+        border-radius: $card-corner-100;
+        background-color: var(--Ccard-bg);
+        color: white;
+        font-weight: 900;
+        height: 3rem;
     }
 }
 

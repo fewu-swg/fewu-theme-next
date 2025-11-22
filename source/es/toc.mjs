@@ -1,3 +1,7 @@
+const sharedObject = {
+    updateFn: undefined,
+}
+
 const backToTop = () => {
     let backToTopButton = document.querySelector('#backToTopButton');
     backToTopButton.classList.add('hide');
@@ -41,7 +45,7 @@ const TOC = (markdown_content, toc) => {
         liList.forEach(v => v.classList.remove("active"));
     }
     const update = () => {
-        if (window.scrollY > visualViewport.height / 100 * 46.25) {
+        if (window.scrollY > visualViewport.height / 100 * 40 - 5.5 * window.SINGLE_REM) {
             toc.classList.remove('hide');
             backToTopButton?.classList?.remove('hide');
             backToTopButton?.setAttribute('hidden', false);
@@ -63,7 +67,7 @@ const TOC = (markdown_content, toc) => {
     }
 
     let ticking = false;
-    window.addEventListener("scroll", () => {
+    sharedObject.updateFn = () => {
         if (!ticking) {
             window.requestAnimationFrame(() => {
                 update();
@@ -71,7 +75,8 @@ const TOC = (markdown_content, toc) => {
             })
         }
         ticking = true;
-    });
+    }
+    window.addEventListener("scroll", sharedObject.updateFn);
     update();
 }
 
@@ -79,4 +84,8 @@ export async function toc() {
     let toc = document.getElementById('markdown_TOC');
     let md_content = document.getElementById('markdown_fillContent');
     TOC(md_content, toc);
+}
+
+export function tocCleanup() {
+    window.removeEventListener("scroll", sharedObject.updateFn);
 }
