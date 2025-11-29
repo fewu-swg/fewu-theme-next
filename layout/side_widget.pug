@@ -1,5 +1,5 @@
 .side.user-intro.NeoWidget
-    img.avatar(loading='lazy',src=(ctx.config.avatar || url_for('/avatar.webp')))
+    img.avatar(loading='lazy',src=(ctx.config.avatar || url_for('/avatar.webp')),alt='avatar')
     h2.userName
         a(href=ctx.config.url)= ctx.config.author
     .intro= ctx.config.note || ctx.config.description || (ctx.config.data && (ctx.config.data.intro || ctx.config.data.announcement)) || 'Write something here...'

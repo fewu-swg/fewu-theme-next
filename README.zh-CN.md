@@ -112,6 +112,8 @@ theme_next:
 
 添加 `theme_next.banner` (`{url: string; credit: string; credit_url: string}`) 来自定义头图
 
+如果 `theme_next.banner.url` 不存在，那么将不会展示头图。
+
 如果 `theme_next.banner.credit` 存在，将会展示版权标识，如果 `theme_next.banner.credit_url` 也存在，那么标识将会指向此 URL。
 
 ```yaml

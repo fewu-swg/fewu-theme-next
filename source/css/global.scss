@@ -94,23 +94,25 @@ body {
     background: var(--Cbg) !important;
 }
 
-body::before {
-    content: '';
-    position: absolute;
-    background-image: url($banner-image);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: var(--top-banner-margin,var(--top-banner-height));
-    width: 100%;
-    background-position: center;
-    pointer-events: none;
-    background-color: var(--Cbg);
-    opacity: 0;
-    transform: scale(1.1);
-    top: 2rem;
-    transition-property: opacity, top, transform, height;
-    transition-duration: .35s;
-    transition-timing-function: ease-in-out;
+@if $banner-enabled {
+    body::before {
+        content: '';
+        position: absolute;
+        background-image: url($banner-image);
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: var(--top-banner-margin,var(--top-banner-height));
+        width: 100%;
+        background-position: center;
+        pointer-events: none;
+        background-color: var(--Cbg);
+        opacity: 0;
+        transform: scale(1.1);
+        top: 2rem;
+        transition-property: opacity, top, transform, height;
+        transition-duration: .35s;
+        transition-timing-function: ease-in-out;
+    }
 }
 
 body.loaded::before {
@@ -136,7 +138,12 @@ body.not-ready {
     flex-direction: column-reverse;
     gap: $card-gap;
     max-width: var(--Wpage-width);
-    margin: calc(var(--top-banner-margin,var(--top-banner-height)) - 9.5rem) auto 0;
+    @if $banner-image {
+        margin: calc(var(--top-banner-margin,var(--top-banner-height)) - 9.5rem) auto 0;
+    }
+    @else {
+        margin: 1rem auto 0;
+    }
 }
 
 #NEO_MAIN>:is(.mainCon, .sideCon),

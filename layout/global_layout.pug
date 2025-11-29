@@ -18,7 +18,7 @@ html(lang=page.language)
             meta(http-equiv="content-language",content=page.language)
             meta(charset='utf-8')
             meta(name="darkreader-lock")
-            meta(name="viewport",content="width:device-width,initial-scale=1.0")
+            meta(name="viewport",content="width=device-width,initial-scale=1.0")
             meta(name="author",content=page.author||ctx.config.author||ctx.config.name)
             style.
                 body:not(.js-disabled){visibility: hidden}
@@ -41,7 +41,7 @@ html(lang=page.language)
             document.body.classList.remove('dom-loaded','main-anim-finished','js-disabled')
         +loading-circle
         +back-to-top
-        header.global
+        header.global#NEO_HEADER
             a.__.kLogo(href=url_for('/'))
                 .home-icon!= _icon('material-symbols:home','rounded')
                 .text!= ctx.config.title || `${ctx.config.author}'s Blog`
@@ -78,13 +78,14 @@ html(lang=page.language)
                         - }
                         input.scroller(value=default_value || 250,type='range',min=0,max=360,step=5,default=default_value) 
         main.no-anim#NEO_MAIN
-            if ctx.config.theme_next.banner && ctx.config.theme_next.banner.credit
+            #OBSERVE_MARKER(aria-hidden=true,style='position:absolute;top:-.9rem;height:.05rem')
+            if ctx.config.theme_next.banner && ctx.config.theme_next.banner.url && ctx.config.theme_next.banner.credit
                 +background-copyright(ctx.config.theme_next.banner.credit, ctx.config.theme_next.banner.credit_url)
             .sideCon#NEO_SIDE
                 include side_widget.pug
             .mainCon#NEO_REPLACE
                 block content
-        footer.global
+        footer.global#NEO_FOOTER
             .copyright-content
                 span.user-content!= ctx.config.footer_content
                 br

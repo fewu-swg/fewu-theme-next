@@ -112,6 +112,8 @@ theme_next:
 
 Add `theme_next.banner` (`{url: string; credit: string; credit_url: string}`) to define custom banner image.
 
+If `theme_next.banner.url` is not specified, the banner will be disabled.
+
 If `theme_next.banner.credit` is specified, a copyright sign will be shown. If `theme_next.banner.credit_url` is specified, the sign will link to the specified URL.
 
 ```yaml

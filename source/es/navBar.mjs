@@ -1,51 +1,35 @@
 import { onPageProcess } from "./ui.mjs";
 
-let lastKnownScrollPosition = 0;
-let toggleTicking = false;
-
 export const sharedObject = {
-    vh: 40,
-    mediaquery: undefined,
-    querylistener: (event) => {
-        if (event.matches) {
-            sharedObject.vh = 40;
-        } else {
-            sharedObject.vh = 64;
-        }
-    },
-    navtogglelistener: (event) => {
-        {
-            if (!toggleTicking) {
-                window.requestAnimationFrame(() => {
-                    if (window.scrollY != lastKnownScrollPosition) {
-                        if (window.scrollY >= visualViewport.height / 100 * sharedObject.vh - 10.5 * SINGLE_REM) {
-                            document.body.classList.add('focus');
-                        } else {
-                            document.body.classList.remove('focus');
-                        }
-                        lastKnownScrollPosition = window.scrollY;
-                    }
-                    toggleTicking = false;
-                });
-                toggleTicking = true;
-            }
-        }
-    }
-}
+    observer: null
+};
 
 export function navBarInit() {
     try {
-        if (location.pathname == '/') {
-            const mediaQuery = window.matchMedia('(max-width: 1024px)');
-            sharedObject.mediaquery = mediaQuery;
-            mediaQuery.addEventListener('change', sharedObject.querylistener);
-            sharedObject.vh = mediaQuery.matches ? 40 : 64;
-        } else {
-            sharedObject.vh = 40;
+        const NAV_ROOT = document.querySelector('#NEO_HEADER');
+        
+        // 使用 IntersectionObserver 替代滚动监听
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // 当标记元素进入视口时，移除 focus 类（显示标题栏）
+                    document.body.classList.remove('focus');
+                } else {
+                    // 当标记元素离开视口时，添加 focus 类（隐藏标题栏）
+                    document.body.classList.add('focus');
+                }
+            });
+        }, {
+            rootMargin: '-1px',
+            threshold: 0
+        });
+
+        const observeMarker = document.querySelector('#OBSERVE_MARKER');
+        if (observeMarker) {
+            observer.observe(observeMarker);
+            sharedObject.observer = observer;
         }
-        const NAV_ROOT = document.querySelector('header.global');
-        // Global Focus
-        document.addEventListener("scroll", sharedObject.navtogglelistener);
+
         palette();
         hamburger();
         search();
@@ -56,8 +40,10 @@ export function navBarInit() {
 }
 
 export function navBarCleanup() {
-    sharedObject.mediaquery?.removeEventListener("change", sharedObject.querylistener);
-    document.removeEventListener("scroll", sharedObject.navtogglelistener);
+    if (sharedObject.observer) {
+        sharedObject.observer.disconnect();
+        sharedObject.observer = null;
+    }
 }
 
 /**

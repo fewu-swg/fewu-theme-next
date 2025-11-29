@@ -13,7 +13,7 @@ $card-corner-100: $card-corner;
 $card-corner-circle: 100vmax;
 $banner-vertical-align: $card-gap * -1;
 $banner-image: get-ctx('ctx.config.theme_next.banner.url');
-$banner-image: if($banner-image, $banner-image, '../banner.webp');
+$banner-enabled: if($banner-image, true, false);
 
 @mixin noLinkUnderline($param: "children") {
     @if $param =="self" {

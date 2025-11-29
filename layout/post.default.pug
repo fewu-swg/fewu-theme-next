@@ -13,7 +13,10 @@ append head
 
 block content
     .post-main.NeoWidget
-        +post-meta(page,true, true)
+        if page.properties.hidden
+            +post-meta-minimal(page)
+        else
+            +post-meta-detailed(page)
         if(page.properties.image)
             .post-img
                 img(src=page.properties.image,alt='The image of this article.')
