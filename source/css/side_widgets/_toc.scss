@@ -1,13 +1,11 @@
 @use "../declaration" as *;
 
 @mixin use() {
-
-
     #markdown_TOC {
         display: none;
     }
 
-    @media(min-width: 1024px) {
+    @media(min-width: 1536px) {
         $line-height: 1.85rem;
         $marker-height: 1.35rem;
 

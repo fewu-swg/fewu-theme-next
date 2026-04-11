@@ -74,7 +74,8 @@
     align-items: center;
     gap: 1rem;
 
-    &>a, &>.pages>a {
+    &>a,
+    &>.pages>a {
         text-decoration: none;
         display: flex;
         height: 3rem;
@@ -125,7 +126,7 @@
     background: var(--Cbg);
     border-radius: 1rem;
     width: 100%;
-    padding: 1.5rem;
+    padding: 1.25rem;
     margin: 1rem 0 0;
     box-sizing: border-box;
     position: relative;
@@ -146,10 +147,16 @@
 
     &>.title {
         font-weight: 900;
-        font-size: 1.5rem;
-        margin-bottom: auto;
+        font-size: 1.25rem;
         z-index: 1;
+    }
 
+    &>.url {
+        margin-bottom: auto;
+
+        &::before {
+            content: attr(href, unset);
+        }
     }
 
     &>.announce-box {
@@ -174,7 +181,7 @@
         position: absolute;
         top: -25%;
         bottom: -25%;
-        right: 0;
+        right: 1rem;
 
         &>svg {
             height: 100%;
