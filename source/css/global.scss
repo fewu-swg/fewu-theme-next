@@ -11,8 +11,7 @@
     color-scheme: light dark;
     font-family: Roboto, sans-serif, system-ui;
     --hue: var(--config-hue);
-    --Wpage-width: min(calc(100% - 2rem), 75rem);
-    --Wcon: var(--Wpage-width);
+    --Wpage-width: min(calc(100% - 2rem), 72rem);
     --Cbrand: oklch(.7 .14 var(--hue));
     --Cdisplay: #000000bf;
     --Cbg: oklch(.95 .01 var(--hue));

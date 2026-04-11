@@ -36,13 +36,30 @@
         max-width: 72%;
     }
 
-    .post-card>.contentBox>.title>a {
-        color: var(--Ctext-90);
-        transition: color .25s ease-in-out;
-    }
+    .post-card>.contentBox>.title {
+        position: relative;
 
-    .post-card>.contentBox>.title:hover>a {
-        color: var(--Cbrand);
+        &::before {
+            content: '';
+            position: absolute;
+            left: -1.25rem;
+            width: .25rem;
+            height: 1.5rem;
+            border-radius: $card-corner-circle;
+            background-color: var(--Cbrand);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &>a {
+            color: var(--Ctext-90);
+            transition: color .25s ease-in-out;
+
+        }
+
+        &:hover>a {
+            color: var(--Cbrand);
+        }
     }
 
     .post-card>.contentBox>.title>a>h2 {
@@ -52,16 +69,14 @@
         overflow: hidden;
         text-overflow: ellipsis;
         line-height: 2.25rem;
-        display: flex;
-        align-items: center;
 
         .after {
             display: inline-flex;
-            margin-left: .5rem;
+            margin-left: .25rem;
             opacity: 0;
             color: var(--Cbtn-content);
             @include transition([opacity]);
-
+            vertical-align: middle;
         }
 
         &:hover>.after {
@@ -70,8 +85,19 @@
     }
 
     @media(max-width:768px) {
-        .post-card>.contentBox>.title>a>h2.after {
-            opacity: 1;
+        .post-card>.contentBox {
+
+            &>.title::before {
+                content: unset;
+            }
+
+            &>.title>a>h2 {
+                text-wrap: wrap;
+
+                &>.after {
+                    opacity: 1;
+                }
+            }
         }
     }
 
@@ -184,10 +210,24 @@
 
             &>.post-card {
                 border-radius: 0;
+                position: relative;
+
+                &>.contentBox::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    border-top: .01rem dashed var(--Ctext-25);
+                    left: 3rem;
+                    right: 3rem;
+                }
             }
 
             &:first-child>.post-card {
                 border-radius: $card-corner $card-corner 0 0;
+
+                &>.contentBox::before {
+                    content: unset;
+                }
             }
 
             &:last-child>.post-card {
@@ -205,10 +245,6 @@
                 width: 100%;
                 max-width: 100%;
                 min-height: unset;
-
-                &>.title>a>h2 {
-                    text-wrap: wrap;
-                }
             }
 
             &>.readMore {

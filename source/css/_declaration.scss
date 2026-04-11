@@ -11,7 +11,7 @@ $card-corner-50: calc($card-corner * .5);
 $card-corner-75: calc($card-corner * .75);
 $card-corner-100: $card-corner;
 $card-corner-circle: 100vmax;
-$banner-vertical-align: $card-gap * -1;
+$banner-vertical-align: $card-gap * -2;
 $banner-image: get-ctx('ctx.config.theme_next.banner.url');
 $banner-enabled: if(sass($banner-image): true; else: false);
 
