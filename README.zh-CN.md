@@ -40,7 +40,7 @@ git clone https://github.com/fewu-swg/fewu-theme-next themes/next
 处理依赖：
 
 ```sh
-pnpm add @fortawesome/free-brands-svg-icons @material-symbols/svg-600
+pnpm add @fewu-swg/fewu-deployer-sass @fewu-swg/fewu-renderer-pug @fortawesome/free-brands-svg-icons @material-symbols/svg-600
 ```
 
 或将此 `package.json` 复制到工作区下，然后执行 `pnpm i`：
@@ -48,8 +48,10 @@ pnpm add @fortawesome/free-brands-svg-icons @material-symbols/svg-600
 ```json
 {
   "dependencies": {
+    "@fewu-swg/fewu-deployer-sass": "^1.0.5",
+    "@fewu-swg/fewu-renderer-pug": "^1.2.0",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
-    "@material-symbols/svg-600": "^0.27.2"
+    "@material-symbols/svg-600": "^0.31.9"
   }
 }
 ```
@@ -66,6 +68,8 @@ pnpm add @fortawesome/free-brands-svg-icons @material-symbols/svg-600
 
 ## 依赖项
 
+* (npm) @fewu-swg/fewu-deployer-sass
+* (npm) @fewu-swg/fewu-renderer-pug
 * (npm) @fortawesome/free-brands-svg-icons
 * (npm) @material-symbols/svg-600
 
