@@ -1,6 +1,44 @@
 @use "../declaration" as *;
 
 @mixin use() {
+    .archive-label {
+        margin-left: 2rem;
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+
+        &>.year {
+            font-size: 1.5rem;
+            line-height: 1.75rem;
+            width: 4rem;
+            text-align: right;
+            box-sizing: border-box;
+            vertical-align: middle;
+        }
+
+        &>.ball {
+            width: 3.75rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+
+            &::before {
+                content: '';
+                border: .2rem solid var(--Cbrand);
+                margin: 0 auto;
+                width: .5rem;
+                height: .5rem;
+                display: block;
+                border-radius: $card-corner-circle;
+            }
+        }
+
+        &>.count {
+            color: var(--Ctext-25);
+            font-size: 1rem;
+        }
+    }
+
     .labeled-card {
         position: relative;
         display: block;
@@ -42,16 +80,23 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 text-wrap: nowrap;
+                padding-left: 2.75rem;
+                position: relative;
+                max-width: calc(100% - 5rem);
             }
 
             &>.title::before {
                 content: '';
-                display: inline-block;
-                width: 1.75rem;
-                height: 100%;
-                position: relative;
+                position: absolute;
+                display: block;
+                width: .25rem;
+                aspect-ratio: 1;
                 box-sizing: border-box;
-                margin-right: 1rem;
+                background-color: var(--Ctext-50);
+                border-radius: $card-corner-circle;
+                left: .75rem;
+                top: 50%;
+                transform: translateY(-50%);
             }
 
             &>.append {
@@ -63,6 +108,22 @@
                     display: inline;
                 }
 
+            }
+        }
+    }
+
+    @media(max-width:768px) {
+        .archive-label {
+            margin-left: 1rem;
+        }
+
+        .labeled-card {
+            margin-left: 0;
+
+            &>a {
+                &>.append {
+                    display: none;
+                }
             }
         }
     }
