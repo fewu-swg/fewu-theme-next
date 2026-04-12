@@ -3,7 +3,7 @@ const language = {
     'en-GB': 'English',
     'zh-CN': '简体中文',
     'zh-TW': '繁体中文',
-    'fr': '法语'
+    'fr': 'French'
 }
 
 export function ltl(lang) {
