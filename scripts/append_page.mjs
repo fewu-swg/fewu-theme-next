@@ -25,6 +25,17 @@ export default function append_page(ctx) {
             return array;
         }
     });
+  if(ctx.config.theme_next?.title_in_path) {
+  Object.entries(ctx.data.sources).forEach(([_,article]) => {
+    let encoded_title = encodeURIComponent(article.title);
+      article.path = join(article.path, encoded_title);
+      article.relative_path = join(article.relative_path, encoded_title);
+      article.web_absolute_path.strings.push(encoded_title);
+      article.web_relative_path.strings.push(encoded_title);
+      article.build_absolute_path.strings.push(encoded_title);
+      article.build_relative_path.strings.push(encoded_title);
+  });
+  }
 }
 
 export {
