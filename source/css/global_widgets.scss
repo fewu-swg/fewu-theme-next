@@ -33,61 +33,6 @@
     border-radius: $card-corner-75;
 }
 
-.background-copyright {
-    text-decoration: none;
-    position: absolute;
-    height: 2rem;
-    top: -3rem;
-    background-color: #0000008d;
-    backdrop-filter: blur(10px);
-    border-radius: 999vmax;
-    color: #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    padding: .5rem;
-
-    right: 0;
-
-    &>.copyright-logo,&>.link-icon {
-        height: 1rem;
-        display: flex;
-    }
-
-    &>.copyright-name {
-        font-size: .85rem;
-        line-height: 1rem;
-        margin: 0 .5rem;
-    }
-
-    & svg {
-        width: 1rem;
-        height: 1rem;
-    }
-
-    &>.link-icon>svg {
-        overflow: hidden;
-        opacity: 0;
-        width: 0;
-        @include transition([opacity width]);
-        color: var(--Cbtn-content);
-
-    }
-
-    &:hover>.link-icon>svg {
-        opacity: .85;
-        width: 1rem;
-    }
-}
-
-@media (max-width:768px) {
-    .background-copyright {
-        margin-right: 1rem;
-    }
-}
-
-
 .next-page {
     display: flex;
     gap: $card-gap;

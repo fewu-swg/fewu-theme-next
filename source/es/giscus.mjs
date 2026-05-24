@@ -20,6 +20,6 @@ export async function findAndInitGiscus() {
         }
         eval(scriptContent);
     } else {
-        console.error(`No _giscus_script found`);
+        console.warn(`Cannot detect giscus element. Disable Giscussing.`);
     }
 }

@@ -19,7 +19,7 @@
         border-radius: 0 0 $card-corner $card-corner;
         box-shadow: $card-shadow;
         background-color: var(--Ccard-bg);
-        @include transition([width height top color background-color]);
+        @include transition([width height transform color background-color]);
 
         & a {
             text-decoration: none;
@@ -35,7 +35,7 @@
         }
 
         body.focus & {
-            top: calc(-.5rem - var(--Height));
+            transform: translateY(calc(-.5rem - var(--Height)));
         }
 
         &>.kLogo,
@@ -66,7 +66,7 @@
                 border-radius: $card-corner-50;
             }
 
-            & > svg {
+            &>svg {
                 color: var(--Ctext-50);
                 margin-left: .15rem;
             }
@@ -78,6 +78,8 @@
         }
 
         &>.kLogo {
+            transition: none;
+
             &>.home-icon {
                 font-size: 1.75rem;
                 margin-right: .5rem;
@@ -178,7 +180,7 @@
                 flex-direction: column;
                 opacity: 0;
                 pointer-events: none;
-                transition-property: height, top, opacity;
+                transition-property: height, transform, opacity;
                 transition-duration: .125s;
                 transition-timing-function: ease-in-out;
                 z-index: 100;
@@ -193,7 +195,7 @@
             }
 
             &.collapsed>.links {
-                top: calc(100% + 1rem);
+                transform: translateY(calc(10% + 1rem));
                 opacity: 1;
                 pointer-events: initial;
             }

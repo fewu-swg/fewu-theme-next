@@ -21,9 +21,9 @@ const TOC = (markdown_content, toc) => {
     let toc_update_fn_open = () => { };
     let toc_update_fn_close = () => { };
     if (!markdown_content) {
-        console.error(`No {markdown_content} specified.`);
+        console.warn(`No {markdown_content} specified. Disable TOC`);
     } else if (!toc) {
-        console.error(`No {toc} specified.`);
+        console.warn(`No {toc} specified. Disable TOC`);
     } else {
         let tocList = markdown_content.querySelectorAll("h2, h3, h4, h5, h6");
         let liList = [];

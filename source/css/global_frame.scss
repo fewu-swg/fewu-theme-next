@@ -2,6 +2,7 @@
 @use "./frame_widgets/header_widget" as header-widget;
 @use "./frame_widgets/footer_widget" as footer-widget;
 @use "./frame_widgets/back-to-top_widget" as back-to-top-widget;
+@use "./frame_widgets/image_copyright" as background-copyright-widget;
 @use "./frame_widgets/loading-circle_widget" as loading-circle-widget;
 
 :root {
@@ -47,12 +48,12 @@
 @keyframes navigationbar-fin {
     from {
         opacity: 0;
-        top: -200px;
+        transform: translateY(-200px);
     }
 
     to {
         opacity: 1;
-        top: 0px;
+        transform: none
     }
 }
 
@@ -60,6 +61,7 @@
 @include footer-widget.use;
 @include back-to-top-widget.use;
 @include loading-circle-widget.use;
+@include background-copyright-widget.use;
 
 @media(max-width: 768px) {
     .mainCon>.index-ul {

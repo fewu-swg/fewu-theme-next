@@ -117,18 +117,16 @@ body {
         pointer-events: none;
         background-color: var(--Cbg);
         opacity: 0;
-        transform: scale(1.1);
-        top: 2rem;
-        transition-property: opacity, top, transform, height;
+        transform: scale(1.1) translateY(2rem);
+        transition-property: opacity, transform, height;
         transition-duration: .35s;
         transition-timing-function: ease-in-out;
     }
 
 
-    body.main-anim-finished::before {
+    body.dom-loaded::before {
         opacity: 1;
         transform: none;
-        top: 0;
     }
 }
 
@@ -191,25 +189,24 @@ body.not-ready {
         top: 0;
         transform: none;
         position: relative;
-        transition-property: opacity, transform, top, margin;
+        transition-property: opacity, transform, margin;
         transition-duration: .35s;
         transition-timing-function: ease-in-out;
     }
 
     body:is(.being-replaced, :not(.main-anim-finished)) #NEO_MAIN>.sideCon {
         opacity: 0;
-        top: 5rem;
-        transform: scale(1.1);
+        transform: scale(1.1) translateY(5rem);
     }
 }
 
 #NEO_MAIN,
 #NEO_REPLACE {
     opacity: 0;
-    top: 10rem;
-    transform: scale(1.1);
+    top: 0;
+    transform: scale(1.1) translateY(10rem);
     position: relative;
-    transition-property: max-width, height, opacity, transform, top, margin;
+    transition-property: max-width, height, opacity, transform, margin;
     transition-duration: .149s;
     transition-timing-function: ease-in-out;
     pointer-events: none;
@@ -218,15 +215,13 @@ body.not-ready {
 body.dom-loaded #NEO_MAIN,
 body.main-anim-finished #NEO_REPLACE {
     opacity: 1;
-    top: 0;
     transform: none;
     pointer-events: unset;
 }
 
 body.being-replaced #NEO_REPLACE {
     opacity: 0;
-    transform: scale(1.1);
-    top: 7rem;
+    transform: scale(1.1) translateY(7rem);
 }
 
 body.js-disabled #NEO_MAIN {

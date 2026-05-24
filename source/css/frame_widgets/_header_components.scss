@@ -4,16 +4,16 @@
 
     #headerComponentPalette,
     #headerComponentSearch {
-        transition: opacity .125s ease-in-out, top .125s ease-in-out;
+        transition: opacity .125s ease-in-out, transform .125s ease-in-out;
         position: absolute;
-        top: 0rem;
+        top: 0;
         right: 0rem;
         opacity: 1;
         box-sizing: border-box;
         box-shadow: $card-shadow;
 
         &:not(.on) {
-            top: -1rem;
+            transform: translateY(-1rem);
             pointer-events: none;
             opacity: 0;
         }
