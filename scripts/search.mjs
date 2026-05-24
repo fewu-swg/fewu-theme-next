@@ -6,7 +6,7 @@ export default function search(ctx) {
     ctx.data.posts.forEach(v => {
         search[v.relative_path] = {
             t: v.title,
-            c: v.raw.replace(/\n+/g, ' ')
+            c: v.raw.replace(/(^#{1,6}\s+|\!?\[.*?\]\(.*?\)|{3}[\s\S]*?{3})/gm, '').trim()
         };
     });
     ctx.on('afterDeploy', async (ctx) => {
