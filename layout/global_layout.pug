@@ -30,9 +30,10 @@ html(lang=page.language)
             link(rel='stylesheet',href=url_for('css/global_side.css'))
             link(rel='stylesheet',href=url_for('css/global_widgets.css'))
             link(rel='stylesheet',href=url_for('css/global_frame.css'))
-            link(rel='stylesheet',href=url_for('css/global_page.css'))
-            link(rel='stylesheet',href=url_for('css/admon-extra.css'))
-            link(rel="stylesheet",href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css")
+            link(rel='stylesheet',defer=true,href=url_for('css/global_page.css'))
+            link(rel='stylesheet',defer=true,href=url_for('css/extra.css'))
+            link(rel="stylesheet",defer=true,href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css")
+            link(rel="stylesheet",defer=true,href="https://fonts.googleapis.com/css?family=Roboto:400,700")
             script(type="module",defer="true",src=url_for('es/ui.mjs'))
 
     body(class='dom-loaded main-anim-finished js-disabled',OCP='OVERRIDE')
@@ -64,8 +65,8 @@ html(lang=page.language)
                 #headerComponentSearch
                         .queryContainer 
                             input
-                            button.clear!= _icon('material-symbols:refresh','rounded')
-                            button.search!= _icon('material-symbols:search','rounded')
+                            button.clear(aria-label=__('Clear Search'))!= _icon('material-symbols:refresh','rounded')
+                            button.search(aria-label=__('Search'))!= _icon('material-symbols:search','rounded')
                         .resultContainer
                 #headerComponentPalette
                     .line
@@ -78,7 +79,7 @@ html(lang=page.language)
                         - }
                         input.scroller(value=default_value || 250,type='range',min=0,max=360,step=5,default=default_value) 
         main.no-anim#NEO_MAIN
-            #OBSERVE_MARKER(aria-hidden=true,style='position:absolute;top:-5.75rem;height:.05rem')
+            #OBSERVE_MARKER(aria-hidden='true',style='position:absolute;top:-5.75rem;height:.05rem')
             - let banner_obj = optional(ctx, 'config', 'theme_next', 'banner')
             if banner_obj && banner_obj.credit && banner_obj.url
                 +background-copyright(banner_obj.credit, banner_obj.credit_url)

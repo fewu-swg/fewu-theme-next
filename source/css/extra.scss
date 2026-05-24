@@ -1,5 +1,49 @@
 @use "./_declaration.scss" as *;
 
+pre code {
+
+    // built-in theme
+    .hljs-keyword {
+        color: #5d7afd;
+    }
+
+    .hljs-string {
+        color: #e79435;
+    }
+
+    .hljs-number {
+        color: #1fd619;
+    }
+
+    .hljs-meta {
+        color: #ee3bc1;
+    }
+
+    .hljs-property {
+        color: #f3d138;
+    }
+
+    .hljs-comment {
+        color: #80d499;
+    }
+
+    .hljs-title {
+        color: rgb(199, 163, 2);
+    }
+
+    .hljs-title.class_ {
+        color: rgb(43, 192, 38);
+    }
+
+    .hljs-variable,.hljs-attr {
+        color: #4296bd;
+    }
+
+    .hljs-literal {
+        color: rgb(202, 70, 235);
+    }
+}
+
 .admonition {
     margin: 2rem 0;
     padding: 0 1rem 0 1.25rem;

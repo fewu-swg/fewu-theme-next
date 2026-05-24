@@ -8,14 +8,11 @@ export function navBarInit() {
     try {
         const NAV_ROOT = document.querySelector('#NEO_HEADER');
         
-        // 使用 IntersectionObserver 替代滚动监听
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // 当标记元素进入视口时，移除 focus 类（显示标题栏）
                     document.body.classList.remove('focus');
                 } else {
-                    // 当标记元素离开视口时，添加 focus 类（隐藏标题栏）
                     document.body.classList.add('focus');
                 }
             });

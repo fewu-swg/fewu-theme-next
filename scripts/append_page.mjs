@@ -26,14 +26,15 @@ export default function append_page(ctx) {
         }
     });
   if(ctx.config.theme_next?.title_in_path) {
-  Object.entries(ctx.data.sources).forEach(([_,article]) => {
+    Object.entries(ctx.data.sources).forEach(([_,article]) => {
+      if(article.properties['permalink:notitle']) return;
       article.path = join(article.path, article.title);
       article.relative_path = join(article.relative_path, article.title);
       article.web_absolute_path.strings.push(article.title);
       article.web_relative_path.strings.push(article.title);
       article.build_absolute_path.strings.push(article.title);
       article.build_relative_path.strings.push(article.title);
-  });
+    });
   }
 }
 

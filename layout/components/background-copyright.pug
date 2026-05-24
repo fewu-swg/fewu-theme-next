@@ -1,5 +1,5 @@
 mixin background-copyright(string,url)
-        a.background-copyright(href=url)
+        a.background-copyright(title='Author of background image',href=url)
             .copyright-logo!= _icon('material-symbols:copyright','rounded')
             .copyright-name!= string
             if url
