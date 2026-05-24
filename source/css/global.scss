@@ -24,19 +24,32 @@
     --Ctext-90: #000000e6;
     --Ctext-100: #000;
 
-    @each $percent, $value in (100, $card-corner-100), (75, $card-corner-75), (50,$card-corner-50), (25,$card-corner-25) {
+    @each $percent, $value in (100, $card-corner-100), (75, $card-corner-75), (50, $card-corner-50), (25, $card-corner-25) {
         --card-corner-#{$percent}: #{$value};
     }
 
-    --Ccard-bg: rgba(255,255,255);
+    --Ccard-bg: rgba(255, 255, 255);
     --card-gap: #{$card-gap};
     --card-corner: #{$card-corner};
     --card-corner-circle: #{$card-corner-circle};
     --card-shadow: #{$card-shadow};
     --card-padding: #{$card-padding};
     --top-banner-height: 40vh;
-    --font-family: Roboto, 'Noto Sans CJK SC', sans-serif, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
-    --mono-font-family: 'Jetbrains Mono', 'Hack', Hack, 'monospace', monospace;
+    --font-family: Roboto,
+    'Noto Sans CJK SC',
+    sans-serif,
+    ui-sans-serif,
+    system-ui,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    Segoe UI Symbol,
+    "Noto Color Emoji";
+    --mono-font-family: 'Jetbrains Mono',
+    'Hack',
+    Hack,
+    'monospace',
+    monospace;
 }
 
 @media(prefers-color-scheme:dark) {
@@ -98,7 +111,7 @@ body {
         background-image: url($banner-image);
         background-repeat: no-repeat;
         background-size: cover;
-        height: var(--top-banner-margin,var(--top-banner-height));
+        height: var(--top-banner-margin, var(--top-banner-height));
         width: 100%;
         background-position: center;
         pointer-events: none;
@@ -110,12 +123,13 @@ body {
         transition-duration: .35s;
         transition-timing-function: ease-in-out;
     }
-}
 
-body.loaded::before {
-    opacity: 1;
-    transform: none;
-    top: 0;
+
+    body.main-anim-finished::before {
+        opacity: 1;
+        transform: none;
+        top: 0;
+    }
 }
 
 html::-webkit-scrollbar {
@@ -135,9 +149,11 @@ body.not-ready {
     flex-direction: column-reverse;
     gap: $card-gap;
     max-width: var(--Wpage-width);
+
     @if $banner-image {
-        margin: calc(var(--top-banner-margin,var(--top-banner-height)) - 9.5rem) auto 0;
+        margin: calc(var(--top-banner-margin, var(--top-banner-height)) - 9.5rem) auto 0;
     }
+
     @else {
         margin: 1rem auto 0;
     }
@@ -217,6 +233,7 @@ body.js-disabled #NEO_MAIN {
     margin-top: 1rem;
 }
 
-svg path, symbol path {
+svg path,
+symbol path {
     fill: currentColor;
 }
