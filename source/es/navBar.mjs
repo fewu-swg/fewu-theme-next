@@ -1,5 +1,13 @@
 import { onPageProcess } from "./ui.mjs";
 
+const d = (fn, delay) => {
+    let timer;
+    return ((...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(fn.bind(this, ...args), delay);
+    });
+}
+
 export const sharedObject = {
     observer: null
 };
@@ -7,7 +15,7 @@ export const sharedObject = {
 export function navBarInit() {
     try {
         const NAV_ROOT = document.querySelector('#NEO_HEADER');
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -101,21 +109,21 @@ function palette() {
         numberShower.innerHTML = defaultValue;
         inputer.value = defaultValue;
     };
-    resetter.addEventListener('click', () => {
+    resetter.addEventListener('click', d(() => {
         numberShower.innerHTML = defaultValue;
         localStorage.removeItem('0xarch.github.io/color-hue');
         docRoot.style.setProperty('--config-hue', defaultValue);
         inputer.value = defaultValue;
-    })
-    inputer.addEventListener('input', () => {
+    }));
+    inputer.addEventListener('input', d(() => {
         numberShower.innerHTML = inputer.value;
         docRoot.style.setProperty('--config-hue', inputer.value);
-    });
-    inputer.addEventListener('change', () => {
+    }));
+    inputer.addEventListener('change', d(() => {
         numberShower.innerHTML = inputer.value;
         localStorage.setItem('0xarch.github.io/color-hue', inputer.value);
         docRoot.style.setProperty('--config-hue', inputer.value);
-    });
+    }));
 }
 
 function search() {
