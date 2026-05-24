@@ -4,7 +4,7 @@ mixin license(post)
         if post.properties['license-url']
             a.url(href=post.properties['license-url'])
         else 
-            a.url(href=ctx.config.url+url_for(post.relative_path))
+            a.url(href=ctx.config.url+url_for(post.web_relative_path.toString()))
         .announce-box
             .author
                 span.label= __('Author')

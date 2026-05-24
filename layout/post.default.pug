@@ -4,7 +4,7 @@ append head
     meta(name="description",content=page.properties.description || page.raw_excerpt)
     meta(name="keywords",content=(page.properties.keywords||(page.categories.concat(page.tags))).join(","))
     meta(name="og:site_name",content=ctx.config.title)
-    meta(name="og:url",content=ctx.config.url+url_for(page.relative_path))
+    meta(name="og:url",content=ctx.config.url+url_for(page.web_relative_path.toString()))
     meta(name="og:type",content="article")
     meta(name="og:description",content=page.properties.description || page.raw_excerpt)
     meta(name="og:title",content=page.title)
@@ -46,11 +46,11 @@ block content
                             }
                         }
                         shown_prev = previous_visible_article;
-                a.left(href=!is_latest&&url_for(shown_prev && shown_prev.relative_path),class=is_latest?'disabled':'--smooth')
+                a.left(href=!is_latest&&url_for(shown_prev && shown_prev.web_relative_path.toString()),class=is_latest?'disabled':'--smooth')
                     .arrow!= _icon('material-symbols:chevron_right','rounded')
                     .title= is_latest?__('Already latest'):shown_prev.title
             else
-                a.left(href=!is_latest&&url_for(page.prev.relative_path),class=is_latest?'disabled':'--smooth')
+                a.left(href=!is_latest&&url_for(page.prev.web_relative_path.toString()),class=is_latest?'disabled':'--smooth')
                     .arrow!= _icon('material-symbols:chevron_right','rounded')
                     .title= is_latest?__('Already latest'):page.prev.title
             if page.next && page.next.properties.hidden == true
@@ -69,11 +69,11 @@ block content
                             }
                         }
                         shown_next = next_visible_article;
-                a.right(href=!is_earliest&&url_for(shown_next && shown_next.relative_path),class=is_earliest?'disabled':'--smooth')
+                a.right(href=!is_earliest&&url_for(shown_next && shown_next.web_relative_path.toString()),class=is_earliest?'disabled':'--smooth')
                     .title= is_earliest?__('Already earliest'):shown_next.title
                     .arrow!= _icon('material-symbols:chevron_right','rounded')
             else
-                a.right(href=!is_earliest&&url_for(page.next.relative_path),class=is_earliest?'disabled':'--smooth')
+                a.right(href=!is_earliest&&url_for(page.next.web_relative_path.toString()),class=is_earliest?'disabled':'--smooth')
                     .title= is_earliest?__('Already earliest'):page.next.title
                     .arrow!= _icon('material-symbols:chevron_right','rounded')
     #markdown_TOC
