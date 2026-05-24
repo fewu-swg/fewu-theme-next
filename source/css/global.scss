@@ -213,7 +213,7 @@ body.not-ready {
 }
 
 body.dom-loaded #NEO_MAIN,
-body.main-anim-finished #NEO_REPLACE {
+body.dom-loaded #NEO_REPLACE {
     opacity: 1;
     transform: none;
     pointer-events: unset;
