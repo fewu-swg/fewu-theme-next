@@ -8,6 +8,7 @@
 :root {
     color-scheme: light dark;
     font-family: Roboto, sans-serif, system-ui;
+    scroll-behavior: smooth;
     --hue: var(--config-hue);
     --Wpage-width: min(calc(100% - 2rem), 72rem);
     --Cbrand: oklch(.7 .14 var(--hue));

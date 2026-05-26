@@ -1,5 +1,9 @@
 const DOMParserI = new DOMParser();
 
+function _stripHash(url) {
+    return url.split('#')[0];
+}
+
 export class SmoothNavigator {
     targetDocument;
     passedLocations = [];
@@ -16,7 +20,14 @@ export class SmoothNavigator {
         this.defaultCallback = callback;
         this.preCallback = preCallback;
         this.passedLocations.push(targetWindow.location.href);
-        targetWindow.addEventListener('popstate', () => {
+        targetWindow.addEventListener('popstate', (event) => {
+            const currentUrl = targetWindow.location.href;
+            const lastUrl = this.passedLocations[this.passedLocations.length - 1];
+            // hashchange popstate
+            if (lastUrl && _stripHash(currentUrl) === _stripHash(lastUrl)) {
+                this.passedLocations[this.passedLocations.length - 1] = currentUrl;
+                return;
+            }
             this.passedLocations.pop();
             if (!this.passedLocations.length) return;
             this.navigate(this.passedLocations[this.passedLocations.length - 1], this.defaultCallback, { isBack: true });

@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (e) { }
     }).then(() => {
         document.body.classList.add('dom-loaded');
-        setTimeout(scrollToTop, 0);
+        if(!location.href.includes('#')) setTimeout(scrollToTop, 0);
         onPageProcess();
         try {
             const NAV_ROOT = document.querySelector('header.global');
@@ -93,11 +93,21 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
+// document.addEventListener('DOMContentLoaded', () => {
+//     if (document.querySelector('meta[data-nosplash="1"]') && window.location.href.endsWith('/')) {
+//         history.replaceState('', '', window.location.href.slice(0, window.location.href.length - 1));
+//     }
+//     else if (document.querySelector('meta[data-nosplash="1"]') && window.location.href.endsWith('/index.html')) {
+//        history.replaceState('', '', window.location.href.slice(0, window.location.href.length - 11));
+//    }
+// })
 document.addEventListener('DOMContentLoaded', () => {
-    if (document.querySelector('meta[data-nosplash="1"]') && window.location.href.endsWith('/')) {
-        history.replaceState('', '', window.location.href.slice(0, window.location.href.length - 1));
+    const meta = document.querySelector('meta[data-nosplash="1"]');
+    if (!meta) return;
+
+    let url = window.location.href;
+    let newUrl = url.replace(/\/(index\.html)?(?=[?#]|$)/, '');
+    if (newUrl !== url) {
+        history.replaceState('', '', newUrl);
     }
-    else if (document.querySelector('meta[data-nosplash="1"]') && window.location.href.endsWith('/index.html')) {
-        history.replaceState('', '', window.location.href.slice(0, window.location.href.length - 11));
-    }
-})
+});
