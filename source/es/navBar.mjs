@@ -1,54 +1,54 @@
 import { onPageProcess } from "./ui.mjs";
 
 const d = (fn, delay) => {
-    let timer;
-    return ((...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(fn.bind(this, ...args), delay);
-    });
+  let timer;
+  return ((...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(fn.bind(this, ...args), delay);
+  });
 }
 
 export const sharedObject = {
-    observer: null
+  observer: null
 };
 
 export function navBarInit() {
-    try {
-        const NAV_ROOT = document.querySelector('#NEO_HEADER');
+  try {
+    const NAV_ROOT = document.querySelector('#NEO_HEADER');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    document.body.classList.remove('focus');
-                } else {
-                    document.body.classList.add('focus');
-                }
-            });
-        }, {
-            rootMargin: '-1px',
-            threshold: 0
-        });
-
-        const observeMarker = document.querySelector('#OBSERVE_MARKER');
-        if (observeMarker) {
-            observer.observe(observeMarker);
-            sharedObject.observer = observer;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.body.classList.remove('focus');
+        } else {
+          document.body.classList.add('focus');
         }
+      });
+    }, {
+      rootMargin: '-1px',
+      threshold: 0
+    });
 
-        palette();
-        hamburger();
-        search();
-        NAV_ROOT.setAttribute('mounted', 'true');
-    } catch (e) {
-        console.error(e);
+    const observeMarker = document.querySelector('#OBSERVE_MARKER');
+    if (observeMarker) {
+      observer.observe(observeMarker);
+      sharedObject.observer = observer;
     }
+
+    palette();
+    hamburger();
+    search();
+    NAV_ROOT.setAttribute('mounted', 'true');
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 export function navBarCleanup() {
-    if (sharedObject.observer) {
-        sharedObject.observer.disconnect();
-        sharedObject.observer = null;
-    }
+  if (sharedObject.observer) {
+    sharedObject.observer.disconnect();
+    sharedObject.observer = null;
+  }
 }
 
 /**
@@ -132,11 +132,16 @@ function search() {
     __listen(Button, Menu, (on) => {
         Menu.classList[on ? 'add' : 'remove']('on');
     });
+    Button.style.display='none';
     let objPromise = (async () => {
-        let raw = await fetch("/search.json");
+        const fetchUrl = new URL(NEXT.webroot).pathname + "search.json";
+        let raw = await fetch(fetchUrl);
+        if(raw.ok) Button.style.display = '';
         let json = await raw.json();
+        console.log(json);
         return Object.entries(json);
     })();
+    objPromise.catch(e => (Button.style.display = ''));
     /**
      * @type {HTMLInputElement}
      */
@@ -161,7 +166,7 @@ function search() {
             for (let [k, v] of obj) {
                 if (typeof v.c === 'string' && v.c.includes(queryString)) {
                     results.push([k, v.t]);
-                } else if (typeof v.t === 'string' && v.t.includes(queryString)) {
+                } else if (typeof k === 'string' && k.includes(queryString)) {
                     results.push([k, v.t]);
                 }
             }
@@ -169,7 +174,7 @@ function search() {
             results.forEach(v => {
                 resultContainer.innerHTML += `<a class="--smooth" href=${v[0].startsWith('/') ? '' : '/'}${v[0]}><b>${v[1]}</b><span>${v[0]}</span></a>`;
             });
-            window?.__smoothNavigator?.applyTo('a.--smooth', onPageProcess);
+            window?.__smoothNavigator?.applyTo('a.--smooth', onPageProcess,()=>{});
         }
         await leastTimer;
         shouldRun = true;

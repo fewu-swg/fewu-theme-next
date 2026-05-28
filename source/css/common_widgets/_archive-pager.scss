@@ -8,8 +8,8 @@
       align-items: center;
       gap: 1rem;
 
-      &>a,
-      &>.pages>a {
+      &>:is(a,span),
+      &>.pages>:is(a,span) {
           text-decoration: none;
           display: flex;
           height: 3rem;

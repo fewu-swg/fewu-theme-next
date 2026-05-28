@@ -52,9 +52,14 @@ export class SmoothNavigator {
         document.querySelector('header.global').classList.remove('collapsed');
         let least_timer = new Promise(resolve => setTimeout(resolve, 250)), lang_timer = new Promise(resolve => setTimeout(resolve, 500)); // for animation
         let content = await (await fetch(url)).text();
+        if(!content) {
+          await least_timer;
+          document.body.classList.remove('being-replaced');
+          return;
+        }
         let newDocument = DOMParserI.parseFromString(content, 'text/html');
         let targetLanguage = newDocument.documentElement.lang, currentLanguage = document.documentElement.lang;
-        if (targetLanguage != currentLanguage) {
+        if (targetLanguage && targetLanguage != currentLanguage) {
             document.body.classList.remove('dom-loaded');
         }
         await least_timer;

@@ -1,8 +1,10 @@
 @use "./_declaration.scss" as *;
 
 @use "./frame_widgets/footer_widget" as footer-widget;
+@use "./frame_widgets/header_components" as header-comp;
 
 @include footer-widget.use;
+@include header-comp.use;
 
 .index-ul {
     padding: 0;
