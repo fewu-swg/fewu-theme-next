@@ -66,8 +66,11 @@ export class SmoothNavigator {
         document.head.querySelectorAll('meta').forEach(el => el.remove());
         newDocument.head.querySelectorAll('meta').forEach(el => document.head.appendChild(el));
         const rawLinkProperties = Array.from(document.head.querySelectorAll('link[data-sc]')).map(el => `${el.rel}=${el.href}`);
+        const links = [];  
         newDocument.head.querySelectorAll('link[data-sc]').forEach(el => {
-          if(!rawLinkProperties.includes(`${el.rel}=${el.href}`)) document.head.appendChild(el);
+          if(rawLinkProperties.includes(`${el.rel}=${el.href}`)) return;
+          document.head.appendChild(el);
+          links.push(el);
         });
         // process multi-language
         if (targetLanguage != currentLanguage) {
@@ -89,6 +92,23 @@ export class SmoothNavigator {
         document.body.classList.remove('being-replaced');
         NEO_REPLACE_NODE.innerHTML = newDocument.querySelector('#NEO_REPLACE').innerHTML;
         document.body.classList.remove('not-ready');
+        const load_waiter = Promise.allSettled(links.map(link => {
+          return new Promise((resolve) => {
+            if (link.sheet) {
+              resolve();
+              return;
+            }
+            const onLoad = () => {
+              link.removeEventListener('load', onLoad);
+              link.removeEventListener('error', onError);
+              resolve();
+            };
+            link.addEventListener('load', onLoad);
+            link.addEventListener('error', onLoad);
+          });
+        }));
+        const load_timeout = new Promise(resolve => setTimeout(resolve, 1500));
+        await Promise.race([ load_waiter, load_timeout ]);
         // scroll pos
         callback();
     }
