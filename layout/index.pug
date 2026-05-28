@@ -1,6 +1,7 @@
 extends global_layout.pug
 
 append head
+    link(data-sc='1',rel='stylesheet',href=url_for('css/spec.page.css'))
     meta(name="description",content=ctx.config.description || ctx.config.note)
     if ctx.config.keywords && Array.isArray(ctx.config.keywords)
         meta(name="keywords",content=ctx.config.keywords.join(','))

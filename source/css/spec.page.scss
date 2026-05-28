@@ -1,0 +1,9 @@
+@use "./_declaration.scss" as *;
+
+@use "./common_widgets/post-card" as post-card;
+@use "./common_widgets/post-meta" as post-meta;
+@use "./common_widgets/archive-pager" as pager;
+
+@include post-card.use;
+@include post-meta.use;
+@include pager.use;

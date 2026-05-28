@@ -1,0 +1,53 @@
+@use "../declaration" as *;
+
+@mixin use {
+  .next-page {
+      display: flex;
+      gap: $card-gap;
+
+      &>a {
+          text-decoration: none;
+          cursor: pointer;
+          color: var(--Ctext-75);
+          background-color: var(--Ccard-bg);
+          border-radius: $card-corner;
+          padding: $card-padding;
+          box-shadow: $card-shadow;
+          display: flex;
+          align-items: center;
+          width: calc(100% - $card-gap/2);
+          transition: color .25s ease-in-out, background-color .25s ease-in-out;
+
+          &:hover {
+              color: var(--Cbtn-content);
+              background-color: var(--Ccard-bg-hover)
+          }
+
+          &>.title {
+              width: 100%;
+              text-align: center
+          }
+
+          &>.arrow,
+          &>.arrow>svg {
+              width: 2rem;
+              height: 2rem;
+              color: var(--Cbtn-content)
+          }
+
+          &.left>.arrow {
+              transform: rotate(180deg)
+          }
+      }
+  }
+
+  @media(max-width:768px) {
+      .next-page {
+          flex-direction: column;
+
+          &>a {
+              width: unset;
+          }
+      }
+  }
+}

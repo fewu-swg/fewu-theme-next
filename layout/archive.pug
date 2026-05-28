@@ -1,6 +1,7 @@
 extends global_layout.pug
 
 append head
+    link(data-sc='1',rel='stylesheet',href=url_for('css/spec.archive.css'))
     meta(name="description",content="Archive page of this website.")
     title #{__('Archives')}(#{page.current}) - #{ctx.config.title}
 

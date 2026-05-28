@@ -1,5 +1,9 @@
 @use "./_declaration.scss" as *;
 
+@use "./frame_widgets/footer_widget" as footer-widget;
+
+@include footer-widget.use;
+
 .index-ul {
     padding: 0;
     margin: 0;

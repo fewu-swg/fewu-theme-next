@@ -50,7 +50,7 @@ export class SmoothNavigator {
         }
         let NEO_REPLACE_NODE = document.querySelector('#NEO_REPLACE');
         document.querySelector('header.global').classList.remove('collapsed');
-        let least_timer = new Promise(resolve => setTimeout(resolve, 250)), lang_timer = new Promise(resolve => setTimeout(resolve, 500));
+        let least_timer = new Promise(resolve => setTimeout(resolve, 250)), lang_timer = new Promise(resolve => setTimeout(resolve, 500)); // for animation
         let content = await (await fetch(url)).text();
         let newDocument = DOMParserI.parseFromString(content, 'text/html');
         let targetLanguage = newDocument.documentElement.lang, currentLanguage = document.documentElement.lang;
@@ -65,6 +65,10 @@ export class SmoothNavigator {
         document.head.querySelector('title').innerHTML = newDocument.head.querySelector('title').innerHTML;
         document.head.querySelectorAll('meta').forEach(el => el.remove());
         newDocument.head.querySelectorAll('meta').forEach(el => document.head.appendChild(el));
+        const rawLinkProperties = Array.from(document.head.querySelectorAll('link[data-sc]')).map(el => `${el.rel}=${el.href}`);
+        newDocument.head.querySelectorAll('link[data-sc]').forEach(el => {
+          if(!rawLinkProperties.includes(`${el.rel}=${el.href}`)) document.head.appendChild(el);
+        });
         // process multi-language
         if (targetLanguage != currentLanguage) {
             try {

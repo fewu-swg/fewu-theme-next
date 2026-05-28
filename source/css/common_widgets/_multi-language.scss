@@ -1,0 +1,44 @@
+@use "../declaration" as *;
+
+@mixin use {
+  .multi-language {
+      user-select: none;
+
+      &>.img {
+          height: fit-content;
+          margin-right: .5rem;
+          color: var(--Cbrand);
+          font-size: 1.5rem;
+
+          &>svg {
+              display: block;
+          }
+      }
+
+      &>.ml-tip {
+          margin: 0;
+          margin-right: .25rem;
+      }
+
+      &>.availables {
+          display: flex;
+          gap: .25rem;
+          height: fit-content;
+
+          & a {
+              display: block;
+              box-sizing: border-box;
+              padding: .25rem;
+              color: var(--Cbtn-content);
+              border-radius: $card-corner-25;
+              background: transparent;
+              transition: background .125s ease-in-out;
+              text-decoration: none;
+
+              &:hover {
+                  background-color: var(--Cbtn-regular-bg-hover);
+              }
+          }
+      }
+  }
+}

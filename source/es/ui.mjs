@@ -102,7 +102,7 @@ window.addEventListener('load', () => {
 //    }
 // })
 document.addEventListener('DOMContentLoaded', () => {
-    const meta = document.querySelector('meta[data-nosplash="1"]');
+    const meta = document.querySelector('meta[data-sp="1"]');
     if (!meta) return;
 
     let url = window.location.href;

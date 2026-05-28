@@ -1,6 +1,6 @@
 @use "_declaration.scss" as *;
 @use "./frame_widgets/header_widget" as header-widget;
-@use "./frame_widgets/footer_widget" as footer-widget;
+// @use "./frame_widgets/footer_widget" as footer-widget;
 @use "./frame_widgets/back-to-top_widget" as back-to-top-widget;
 @use "./frame_widgets/image_copyright" as background-copyright-widget;
 @use "./frame_widgets/loading-circle_widget" as loading-circle-widget;
@@ -58,7 +58,7 @@
 }
 
 @include header-widget.use;
-@include footer-widget.use;
+// @include footer-widget.use;
 @include back-to-top-widget.use;
 @include loading-circle-widget.use;
 @include background-copyright-widget.use;
@@ -69,139 +69,4 @@
     }
 }
 
-.page-navigator {
-    margin: 0 auto;
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
 
-    &>a,
-    &>.pages>a {
-        text-decoration: none;
-        display: flex;
-        height: 3rem;
-        width: 3rem;
-        align-items: center;
-        justify-content: center;
-        border-radius: $card-corner-100;
-        background-color: var(--Ccard-bg);
-        box-shadow: $card-shadow;
-        color: var(--Cbrand);
-        cursor: pointer;
-        font-weight: 900;
-        transition: background-color .125s ease-in-out;
-
-        &.prev {
-            transform: rotate(180deg)
-        }
-
-        &:is(.prev, .next)>svg {
-            font-size: 2rem;
-        }
-
-        &.now {
-            background-color: var(--Cbrand);
-            color: var(--Cbg);
-        }
-
-        &:not([href]):not(.now) {
-            color: var(--Ctext-25);
-        }
-
-        &[href]:not(.now):hover {
-            background-color: var(--Cbtn-plain-bg-hover);
-        }
-    }
-
-    &>.pages {
-        display: flex;
-        border-radius: $card-corner-100;
-        background-color: var(--Ccard-bg);
-        color: white;
-        font-weight: 900;
-        height: 3rem;
-    }
-}
-
-.license {
-    background: var(--Cbg);
-    border-radius: 1rem;
-    width: 100%;
-    padding: 1.25rem;
-    margin: 1rem 0 0;
-    box-sizing: border-box;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    min-height: 10rem;
-    overflow: hidden;
-
-    & a {
-        color: var(--Cbtn-content);
-        text-decoration: none;
-
-        &:hover {
-            color: var(--Cbrand);
-        }
-    }
-
-    &>.title {
-        font-weight: 900;
-        font-size: 1.25rem;
-        z-index: 1;
-    }
-
-    &>.url {
-        margin-bottom: auto;
-
-        &::before {
-            content: attr(href, unset);
-        }
-    }
-
-    &>.announce-box {
-        display: flex;
-        gap: 1.5rem;
-        z-index: 1;
-
-        &>*>.label {
-            font-size: .875rem;
-            color: var(--Ctext-25);
-            display: block;
-        }
-
-        &>*>.val {
-            font-size: 1.25rem;
-            display: block;
-            line-height: 1.625rem;
-        }
-    }
-
-    .background {
-        position: absolute;
-        top: -25%;
-        bottom: -25%;
-        right: 1rem;
-
-        &>svg {
-            height: 100%;
-            width: 100%;
-            color: var(--Ccard-bg);
-        }
-    }
-}
-
-@media(max-width:768px) {
-    .license>.background {
-        right: 0;
-        left: 0;
-        display: flex;
-        align-items: center;
-    }
-
-    .license>.announce-box {
-        flex-direction: column;
-    }
-}

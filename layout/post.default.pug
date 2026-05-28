@@ -1,6 +1,8 @@
 extends global_layout.pug
 
 append head
+    link(data-sc='1',rel='stylesheet',href=url_for('css/spec.post.css'))
+    link(data-sc='1',rel='stylesheet',href=url_for('css/global_widgets.css'))
     meta(name="description",content=page.properties.description || page.raw_excerpt)
     meta(name="keywords",content=(page.properties.keywords||(page.categories.concat(page.tags))).join(","))
     meta(name="og:site_name",content=ctx.config.title)

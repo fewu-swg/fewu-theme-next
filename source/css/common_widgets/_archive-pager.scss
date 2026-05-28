@@ -1,0 +1,58 @@
+@use "../_declaration.scss" as *;
+
+@mixin use {
+  .page-navigator {
+      margin: 0 auto;
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      &>a,
+      &>.pages>a {
+          text-decoration: none;
+          display: flex;
+          height: 3rem;
+          width: 3rem;
+          align-items: center;
+          justify-content: center;
+          border-radius: $card-corner-100;
+          background-color: var(--Ccard-bg);
+          box-shadow: $card-shadow;
+          color: var(--Cbrand);
+          cursor: pointer;
+          font-weight: 900;
+          transition: background-color .125s ease-in-out;
+
+          &.prev {
+              transform: rotate(180deg)
+          }
+
+          &:is(.prev, .next)>svg {
+              font-size: 2rem;
+          }
+
+          &.now {
+              background-color: var(--Cbrand);
+              color: var(--Cbg);
+          }
+
+          &:not([href]):not(.now) {
+              color: var(--Ctext-25);
+          }
+
+          &[href]:not(.now):hover {
+              background-color: var(--Cbtn-plain-bg-hover);
+          }
+      }
+
+      &>.pages {
+          display: flex;
+          border-radius: $card-corner-100;
+          background-color: var(--Ccard-bg);
+          color: white;
+          font-weight: 900;
+          height: 3rem;
+      }
+  }
+}

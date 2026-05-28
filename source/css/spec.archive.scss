@@ -1,0 +1,7 @@
+@use "./_declaration.scss" as *;
+
+@use "./common_widgets/labeled-card" as card;
+@use "./common_widgets/archive-pager" as pager;
+
+@include card.use;
+@include pager.use;

@@ -233,3 +233,10 @@ svg path,
 symbol path {
     fill: currentColor;
 }
+
+.giscus {
+    box-sizing: border-box;
+    padding: $card-padding;
+    background-color: var(--Cbg);
+    border-radius: $card-corner-75;
+}

@@ -1,6 +1,7 @@
 extends global_layout.pug
 
 append head
+    link(data-sc='1',rel='stylesheet',href=url_for('css/spec.archive.css'))
     meta(name="description",content=`Posts with tag ${_container_of('tags',page.current).key} are listed here.`)
     title #{_container_of('tags',page.current).key} - #{__('Tags')} - #{ctx.config.title}
 
