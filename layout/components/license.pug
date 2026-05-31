@@ -2,9 +2,10 @@ mixin license(post)
     .license
         .title= post.title
         if post.properties['license-url']
-            a.url(href=post.properties['license-url'])
+            a.url(aria-label=__('Post URL(License)'),href=post.properties['license-url'])
         else 
-            a.url(href=ctx.config.url+url_for(post.web_relative_path.toString()))
+            a.url(aria-label=__('Post URL(License)'),href=ctx.config.url+url_for(post.web_relative_path.toString()))
+        .background!= _icon('fa-brand:fa-creative-commons')
         .announce-box
             .author
                 span.label= __('Author')
@@ -41,4 +42,3 @@ mixin license(post)
                         a= __('Custom license')
                     else
                         a= __('Private or other license')
-        .background!= _icon('fa-brand:fa-creative-commons')
