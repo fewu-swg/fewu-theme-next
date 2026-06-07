@@ -44,33 +44,39 @@ export default function (ctx) {
         post_url_for: (path) => {
             return join(ctx.config.root, relative(ctx.PUBLIC_DIRECTORY, path));
         },
-        analyze_license: (str) => {
+        analyze_license: (str, ctx) => {
             let _str = String(str).toLowerCase();
-            if (_str === 'private') {
-                return {
-                    type: 'private'
+            if( _str !== 'default') {
+                if (_str === 'private') {
+                    return {
+                        type: 'private'
+                    }
+                }
+                if (_str === 'custom') {
+                    return {
+                        type: 'custom'
+                    }
+                }
+                if (_str.startsWith('cc')) {
+                    let types = ['by', 'nc', 'nd', 'sa'];
+                    let version = _str.replace(/[^0-9^.]/g, '') ?? '4.0';
+                    types = types.filter(v => _str.includes(v));
+                    return {
+                        type: 'creative-common',
+                        value: types,
+                        version
+                    }
                 }
             }
-            if (_str === 'custom') {
-                return {
-                    type: 'custom'
-                }
-            }
-            if (_str.startsWith('cc')) {
-                let types = ['by', 'nc', 'nd', 'sa'];
-                let version = _str.replace(/[^0-9^.]/g, '') ?? '4.0';
-                types = types.filter(v => _str.includes(v));
-                return {
-                    type: 'creative-common',
-                    value: types,
-                    version
-                }
+            else if (ctx.config.license) {
+              return ctx.config.license;
             }
             return {
                 type: 'creative-common',
                 value: ['by', 'nc', 'sa'],
                 version: '4.0'
             }
+      
         },
         get_fa_brand,
         ltl,

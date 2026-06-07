@@ -1,11 +1,13 @@
 mixin license(post)
     .license
         .title= post.title
+        - let _license = analyze_license(post.license, ctx)
         if post.properties['license-url']
             a.url(aria-label=__('Post URL(License)'),href=post.properties['license-url'])
         else 
             a.url(aria-label=__('Post URL(License)'),href=ctx.config.url+url_for(post.web_relative_path.toString()))
-        .background!= _icon('fa-brand:fa-creative-commons')
+        if _license.type == 'create-common'
+            .background!= _icon('fa-brand:fa-creative-commons')
         .announce-box
             .author
                 span.label= __('Author')
@@ -17,7 +19,6 @@ mixin license(post)
             .license-type
                 span.label= __('License Agreement')
                 span.val
-                    - let _license = analyze_license(post.license)
                     if _license.type == 'creative-common'
                         - let url = 'https://creativecommons.org/licenses/'
                         - let text = 'CC '
@@ -40,5 +41,7 @@ mixin license(post)
                         a.h-link(href=url)= text
                     else if _license.type === 'custom'
                         a= __('Custom license')
+                    else if _license.type === 'private'
+                        a= __('All rights reserved')
                     else
-                        a= __('Private or other license')
+                        a= __('Other license')
